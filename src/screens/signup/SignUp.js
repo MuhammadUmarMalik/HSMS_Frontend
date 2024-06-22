@@ -19,9 +19,9 @@ const SignupPage = observer(() => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formFields = toJS(signUpStore.formFields); // Extract observable values
+        const formFields = toJS(signUpStore.formFields);
         console.log('Form Fields:', formFields);
-        if (validateSignupForm(formFields)) {
+        if (validateSignupForm()){
             try {
                 await signUpStore.signup(navigate);
             } catch (error) {

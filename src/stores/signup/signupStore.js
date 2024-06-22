@@ -1,4 +1,3 @@
-// signupStore.js
 import { makeObservable, observable, action, runInAction, toJS } from 'mobx';
 import { SC } from '../../services/serverCall';
 import userStore from '../users/usersStore';
@@ -50,30 +49,28 @@ class SignupStore {
     async signup(navigate) {
         this.setLoading(true);
         try {
-            const payload = toJS(this.formFields); // Extract observable values
-            console.log('Request Payload:', payload);
+            const payload = toJS(this.formFields); 
+            // console.log('Request Payload:', payload);
             const response = await SC.postCall('/user_signup', payload);
-            console.log('Response Data:', response.data); // Log the response data
+            console.log('Response Data:', response.data);
 
-            if (response.data && response.data.customer && response.data.token) {
-                const user = response.data.customer;
-                const token = response.data.token;
-                localStorage.setItem('userToken', JSON.stringify({ accessToken: token.token, role: user.role }));
-                runInAction(() => {
-                    userStore.setUser(user);
-                    userStore.setToken(token.token);
-                    userStore.setRole(user.role || 'customer'); // Default role as 'customer'
-                });
+            if (response.data && response.data.data && response.data.data.token) {
                 console.log('Navigating to home page');
+                const { token } = response.data.data;
+                localStorage.setItem('userToken', JSON.stringify({ accessToken: token.token, role: 'customer' }));
+                runInAction(() => {
+                    userStore.setToken(token.token);
+                    userStore.setRole('customer'); 
+                });
                 navigate('/home');
             } else {
-                throw new Error('Invalid response from server');
+                throw new Error('error');
             }
         } catch (error) {
             runInAction(() => {
                 const errorMessage = error.response ? error.response.data.message : 'Signup failed';
                 this.setError(errorMessage);
-                console.log('Error Response:', error.response);
+                console.log('Error Response:', error);
             });
         } finally {
             runInAction(() => {

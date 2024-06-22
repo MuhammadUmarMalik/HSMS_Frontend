@@ -16,7 +16,7 @@ class UserStore {
   setToken(token) {
     this.token = token;
   }
-
+  
   setRole(role) {
     this.role = role;
   }

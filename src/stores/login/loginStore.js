@@ -46,7 +46,7 @@ class LoginStore {
       this.setLoading(true);
       try {
           const response = await SC.postCall('/user_login', this.formFields);
-          console.log('Response Data:', response.data); // Log the actual response data
+          console.log('Response Data:', response.data);
           if (response.data && response.data.data && response.data.data.user && response.data.data.token) {
               const { user, token } = response.data.data;
               localStorage.setItem('userToken', JSON.stringify({ accessToken: token, role: user.role }));

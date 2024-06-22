@@ -1,4 +1,3 @@
-// src/screens/hairstyles/HairStylesPageStyles.js
 import { styled } from '@mui/system';
 import { Card } from '@mui/material';
 

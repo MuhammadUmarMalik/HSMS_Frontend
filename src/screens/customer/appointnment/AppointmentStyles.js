@@ -34,54 +34,54 @@ export const FormBox = styled(Box)({
 export const CustomTextField = styled(TextField)({
   marginBottom: '16px',
   '& .MuiInputBase-root': {
-    color: '#fff', // Text color
+    color: '#fff', 
   },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      borderColor: '#fff', // Border color
-    },
+      borderColor: '#fff',
     '&:hover fieldset': {
-      borderColor: '#fff', // Border color on hover
+      borderColor: '#fff', 
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#ffcc00', // Border color on focus
+      borderColor: '#ffcc00', 
     },
   },
   '& .MuiInputLabel-root': {
-    color: '#fff', // Label color
+    color: '#fff', 
   },
   '& .MuiInputAdornment-root .MuiSvgIcon-root': {
-    color: '#fff', // Icon color
+    color: '#fff', 
   },
   '& .MuiInputAdornment-root .MuiTypography-root': {
-    color: '#fff', // Placeholder color
+    color: '#fff', 
   },
   '& .MuiSvgIcon-root': {
-    color: '#fff', // Icon color
+    color: '#fff', 
   },
+}
 });
 
 export const CustomFormControl = styled(FormControl)({
   marginBottom: '16px',
   '& .MuiInputBase-root': {
-    color: '#fff', // Text color
+    color: '#fff', 
   },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      borderColor: '#fff', // Border color
+      borderColor: '#fff', 
     },
     '&:hover fieldset': {
-      borderColor: '#fff', // Border color on hover
+      borderColor: '#fff', 
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#ffcc00', // Border color on focus
+      borderColor: '#ffcc00', 
     },
   },
   '& .MuiInputLabel-root': {
-    color: '#fff', // Label color
+    color: '#fff', 
   },
   '& .MuiSelect-icon': {
-    color: '#fff', // Select dropdown icon color
+    color: '#fff', 
   },
 });
 

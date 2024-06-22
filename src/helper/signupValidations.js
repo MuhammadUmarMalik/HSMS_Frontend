@@ -29,7 +29,7 @@ export const validateSignupForm = () => {
     return false;
   }
 
-  signUpStore.setError(''); // Clear errors if all validations pass
+  signUpStore.setError('');
   return true;
 };
 
