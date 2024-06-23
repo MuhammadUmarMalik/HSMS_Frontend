@@ -18,6 +18,7 @@ const AdminHeader = () => {
           <Title variant="h4">SHAPE YOUR STYLE</Title>
         </Box>
         <MenuRight>
+          <NavLink to="/profile">Barber's Profile</NavLink>
           <NavLink to="/hair-style">Hair Styles</NavLink>
           <NavLink to="/reviews">Reviews</NavLink>
         </MenuRight>
