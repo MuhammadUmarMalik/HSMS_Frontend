@@ -10,6 +10,7 @@ const AdminHeader = () => {
       <Toolbar>
         <MenuLeft>
           <NavLink to="/home">Home</NavLink>
+          <NavLink to="/AIStyles">AI Styles</NavLink>
           <NavLink to="/barbers">Barbers</NavLink>
         </MenuLeft>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
