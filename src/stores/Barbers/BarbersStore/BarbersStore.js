@@ -1,6 +1,9 @@
 import { makeObservable, observable, action, runInAction, toJS } from "mobx";
-import { SC } from "../../services/serverCall";
+import { SC } from "../../../services/serverCall";
 class BarbersStore {
+  //   selectedDate = new Date();
+  selectedDate = null;
+
   formFields = {
     name: "",
   };
@@ -17,9 +20,12 @@ class BarbersStore {
       setError: action,
       setLoading: action,
       FetchBarber: action,
+      setSelectedDate: action,
     });
   }
-
+  setSelectedDate(date) {
+    this.selectedDate = date;
+  }
   setFormField(field, value) {
     this.formFields[field] = value;
   }

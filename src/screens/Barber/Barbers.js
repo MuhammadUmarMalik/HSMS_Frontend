@@ -1,16 +1,38 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
-import BarberHeader from "../../components/headers/BarberHeader.js/BarberHeader";
-import { NavLink } from "../../screens/admin/home/HomeStyles";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { barbersStore } from "../../stores/Barbers/BarbersStore/BarbersStore";
 import {
   Container,
   CustomAiHeading,
   CalendTaskContainer,
   ItemLeft,
   ItemRight,
+  CalendarContainer,
+  TaskItem,
+  TaskSwitch,
+  TaskIcon,
+  TaskInfo,
+  HeaderContainer
 } from "./BarberStyle";
-import { Typography } from "@mui/material";
+import { Typography, Switch, IconButton } from "@mui/material";
+import SettingsIcon from '@mui/icons-material/Settings';
+import { BarChart, DonutLarge, Equalizer } from "@mui/icons-material";
+import TuneIcon from '@mui/icons-material/Tune';
 
-const Barbers = () => {
+const Barbers = observer(() => {
+  const onDateChange = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Resetting the time to midnight
+
+    if (date >= today) {
+      barbersStore.setSelectedDate(date);
+    } else {
+      alert("Selected date cannot be in the past");
+    }
+  };
+
   return (
     <>
       <Container>
@@ -19,17 +41,71 @@ const Barbers = () => {
         </CustomAiHeading>
         <CalendTaskContainer>
           <ItemLeft>
-            <h1>usman</h1>
-            <h1>usman</h1>
+            <CalendarContainer>
+              <Typography
+                variant="h4"
+                style={{
+                  color: "#ffcc00",
+                  textAlign: "center",
+                  marginBottom: "1rem",
+                }}
+              >
+                Calendar
+              </Typography>
+              <Calendar
+                onChange={onDateChange}
+                value={barbersStore.selectedDate}
+                tileDisabled={({ date }) =>
+                  date < new Date().setHours(0, 0, 0, 0)
+                }
+              />
+            </CalendarContainer>
           </ItemLeft>
           <ItemRight>
-            <h1>usman</h1>
-            <h1>usman</h1>
+            <HeaderContainer>
+              <Typography
+                variant="h5"
+                style={{
+                  color: "#fff",
+                  marginRight: "auto",
+                }}
+              >
+                Advanced Statistic
+              </Typography>
+              <TuneIcon style={{ color: "#fff" }} />
+              {/* <Equalizer style={{ color: "#fff" }} /> */}
+            </HeaderContainer>
+            <TaskItem>
+              <TaskIcon>📄</TaskIcon>
+              <TaskInfo>
+                <Typography variant="h6">Task A</Typography>
+                <Typography variant="body2">+ $200.00</Typography>
+              </TaskInfo>
+              <TaskSwitch>
+                <Typography variant="body2" style={{ marginRight: "0.5rem" }}>
+                  On Progress
+                </Typography>
+                <Switch defaultChecked color="primary" />
+              </TaskSwitch>
+            </TaskItem>
+            <TaskItem>
+              <TaskIcon>📄</TaskIcon>
+              <TaskInfo>
+                <Typography variant="h6">Task B</Typography>
+                <Typography variant="body2">+ $200.00</Typography>
+              </TaskInfo>
+              <TaskSwitch>
+                <Typography variant="body2" style={{ marginRight: "0.5rem" }}>
+                  On Progress
+                </Typography>
+                <Switch defaultChecked color="primary" />
+              </TaskSwitch>
+            </TaskItem>
           </ItemRight>
         </CalendTaskContainer>
       </Container>
     </>
   );
-};
+});
 
 export default Barbers;
