@@ -11,6 +11,9 @@ import BarberPage from "./screens/admin/barber/Barber";
 import Barbers from "./screens/Barber/Barbers";
 import Dashboard from "./screens/Barber/Dashboard/Dashboard";
 import BarberHeader from "./components/headers/BarberHeader.js/BarberHeader";
+import Profile from "./screens/Barber/Profile/Profile";
+import Appointments from "./screens/Barber/Appointments/Appointments";
+import Contact from "./screens/Barber/Contact/Contact";
 
 function App() {
   return (
@@ -28,8 +31,9 @@ function App() {
         <Route path="barbers" element={<BarberHeader />}>
           <Route path="/barbers/home" element={<Barbers />} />
           <Route path="/barbers/dashboard" element={<Dashboard />} />
-          <Route path="/barbers/profile" element={<HairStyles />} />
-          <Route path="/barbers/appointments" element={<HairStyles />} />
+          <Route path="/barbers/profile" element={<Profile />} />
+          <Route path="/barbers/appointments" element={<Appointments />} />
+          <Route path="/barbers/contact" element={<Contact />} />
         </Route>
       </Routes>
     </>
