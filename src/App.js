@@ -14,6 +14,7 @@ import BarberHeader from "./components/headers/BarberHeader.js/BarberHeader";
 import Profile from "./screens/Barber/Profile/Profile";
 import Appointments from "./screens/Barber/Appointments/Appointments";
 import Contact from "./screens/Barber/Contact/Contact";
+import Reviews from "./screens/customer/Reviews/Reviews";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/barber" element={<BarberPage />} />
         <Route path="appointment" element={<AppointmentPage />} />
+        <Route path="/reviews" element={<Reviews />} />
         <Route path="hair-style" element={<HairStyles />} />
         <Route path="barbers" element={<BarberHeader />}>
           <Route path="/barbers/home" element={<Barbers />} />
