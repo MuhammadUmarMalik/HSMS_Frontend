@@ -21,12 +21,13 @@ import barberbarber_man2 from "../../../assests/barber_man2.png";
 import barberbarber_man3 from "../../../assests/barber_man3.png";
 import barberbarber_man4 from "../../../assests/barber_man4.png";
 import barberbarber_man5 from "../../../assests/barber_man5.png";
+import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 
 const BarbersProfile = () => {
   return (
     <>
       <Container>
-        <AdminHeader />
+        <CustomerHeader />
         <CustomAiHeading>
           <Typography variant="h4">Barber's Profile</Typography>
           <h1

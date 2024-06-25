@@ -1,11 +1,19 @@
 // src/screens/hairstyles/HairStylesPage.js
-import React from 'react';
-import { Container, Typography, Grid, CardContent, CardMedia, IconButton } from '@mui/material';
-import { Save as SaveIcon } from '@mui/icons-material';
-import { observer } from 'mobx-react';
-import { hairStylesData } from './hairStylesData.js';
-import { StyledCard } from './HairStylesStyle.js';
-import { hairStylesStore } from '../../../stores/hairStyles/HairStylesStore.js';
+import React from "react";
+import {
+  Container,
+  Typography,
+  Grid,
+  CardContent,
+  CardMedia,
+  IconButton,
+} from "@mui/material";
+import { Save as SaveIcon } from "@mui/icons-material";
+import { observer } from "mobx-react";
+import { hairStylesData } from "./hairStylesData.js";
+import { StyledCard } from "./HairStylesStyle.js";
+import { hairStylesStore } from "../../../stores/hairStyles/HairStylesStore.js";
+import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader.js";
 
 const HairStyles = observer(() => {
   const { savedStyles, toggleSaveStyle } = hairStylesStore;
@@ -15,7 +23,10 @@ const HairStyles = observer(() => {
   };
 
   return (
-    <Container>
+    <Container
+      // style={{ backgroundColor: "#1a1a3a", width: "100%", height: "100vh" }}
+    >
+      <CustomerHeader />
       <Typography variant="h4" gutterBottom>
         Our Hair Styles
       </Typography>
@@ -36,7 +47,7 @@ const HairStyles = observer(() => {
                 </Typography>
                 <IconButton
                   onClick={() => handleSave(style.id)}
-                  color={savedStyles.includes(style.id) ? 'primary' : 'default'}
+                  color={savedStyles.includes(style.id) ? "primary" : "default"}
                 >
                   <SaveIcon />
                 </IconButton>

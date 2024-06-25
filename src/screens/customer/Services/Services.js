@@ -22,12 +22,13 @@ import ServicesImage3 from "../../../assests/ServicesImage3.png";
 import ServicesImage4 from "../../../assests/ServicesImage4.png";
 import ServicesImage5 from "../../../assests/ServicesImage5.png";
 import ServicesImage6 from "../../../assests/ServicesImage6.png";
+import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 
 const Services = () => {
   return (
     <>
       <Container>
-        <AdminHeader />
+        <CustomerHeader />
         <ServicesHeading>
           <Typography style={{ fontWeight: "bold" }} variant="h4">
             Professional Services

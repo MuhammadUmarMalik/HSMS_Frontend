@@ -23,6 +23,7 @@ import Webcam from "react-webcam";
 import Cropper from "react-easy-crop";
 import { observer } from "mobx-react";
 import { aiStyleStore } from "../../../stores/AIStyleStore/AIStyleStore";
+import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 
 const AIStyles = () => {
   const webcamRef = React.useRef(null);
@@ -102,7 +103,7 @@ const AIStyles = () => {
   return (
     <>
       <Container>
-        <AdminHeader />
+        <CustomerHeader />
         <CustomAiHeading>
           <Typography variant="h4">Ai Recommendation Styles</Typography>
         </CustomAiHeading>

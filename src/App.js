@@ -15,6 +15,7 @@ import Profile from "./screens/Barber/Profile/Profile";
 import Appointments from "./screens/Barber/Appointments/Appointments";
 import Contact from "./screens/Barber/Contact/Contact";
 import Reviews from "./screens/customer/Reviews/Reviews";
+import CustomerHeader from "./components/headers/customer-header/CustomerHeader";
 
 function App() {
   return (
@@ -22,14 +23,22 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/aIStyles" element={<AIStyles />} />
-        <Route path="/profile" element={<BarbersProfile />} />
-        <Route path="/services" element={<Services />} />
+
+        {
+          // customer routes
+          <>
+            {/* <Route path="customer" element={<CustomerHeader />} /> */}
+            <Route path="/customer/home" element={<HomePage />} />
+            <Route path="/customer/aIStyles" element={<AIStyles />} />
+            <Route path="/customer/services" element={<Services />} />
+            <Route path="/customer/profile" element={<BarbersProfile />} />
+            <Route path="/customer/hair-style" element={<HairStyles />} />
+            <Route path="/customer/reviews" element={<Reviews />} />
+          </>
+        }
         <Route path="/barber" element={<BarberPage />} />
+        {/* add barbers for admin*/}
         <Route path="appointment" element={<AppointmentPage />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="hair-style" element={<HairStyles />} />
         <Route path="barbers" element={<BarberHeader />}>
           <Route path="/barbers/home" element={<Barbers />} />
           <Route path="/barbers/dashboard" element={<Dashboard />} />
