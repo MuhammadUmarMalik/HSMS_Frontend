@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Box } from '@mui/material';
 import { Logo, Title, MenuLeft, MenuRight } from './HeaderStyles';
-import { NavLink } from '../../../screens/admin/home/HomeStyles'; 
+import { NavLink } from '../../../screens/admin/home/HomeStyles';
 import logo from '../../../assests/logo.png';
 
 const AdminHeader = () => {
@@ -11,7 +11,8 @@ const AdminHeader = () => {
         <MenuLeft>
           <NavLink to="/home">Home</NavLink>
           <NavLink to="/AIStyles">AI Styles</NavLink>
-          <NavLink to="/barbers">Barbers</NavLink>
+          <NavLink to="/services">Services</NavLink>
+          <NavLink to="/barber">Barbers</NavLink>
         </MenuLeft>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Logo src={logo} alt="Logo" />

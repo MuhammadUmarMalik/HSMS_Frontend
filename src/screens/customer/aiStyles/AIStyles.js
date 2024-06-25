@@ -1,6 +1,19 @@
 import React, { useCallback } from "react";
 import {
-  Container, CustomAiHeading, QuoteBox, Quote, Author, CameraIconBox, CameraIcon, UploadButton, SelectButton, ItemRight, ItemLeft, SubContainer, Logo, ItemCenter,
+  Container,
+  CustomAiHeading,
+  QuoteBox,
+  Quote,
+  Author,
+  CameraIconBox,
+  CameraIcon,
+  UploadButton,
+  SelectButton,
+  ItemRight,
+  ItemLeft,
+  SubContainer,
+  Logo,
+  ItemCenter,
 } from "./AiStylesPageStyles";
 import AdminHeader from "../../../components/headers/admin/Header";
 import { Typography, Modal, Box, Button } from "@mui/material";
@@ -12,7 +25,6 @@ import { observer } from "mobx-react";
 import { aiStyleStore } from "../../../stores/AIStyleStore/AIStyleStore";
 
 const AIStyles = () => {
-
   const webcamRef = React.useRef(null);
 
   const handleUploadClick = () => {
@@ -21,7 +33,7 @@ const AIStyles = () => {
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
-    aiStyleStore.setFormField('capturedImage', imageSrc);
+    aiStyleStore.setFormField("capturedImage", imageSrc);
     aiStyleStore.setOpenCamera(false);
     aiStyleStore.setOpenCrop(true);
   }, [webcamRef]);
@@ -69,8 +81,11 @@ const AIStyles = () => {
 
   const handleSaveCroppedImage = async () => {
     try {
-      const croppedImage = await getCroppedImg(aiStyleStore.formFields.capturedImage, aiStyleStore.croppedAreaPixels);
-      aiStyleStore.setFormField('capturedImage', croppedImage);
+      const croppedImage = await getCroppedImg(
+        aiStyleStore.formFields.capturedImage,
+        aiStyleStore.croppedAreaPixels
+      );
+      aiStyleStore.setFormField("capturedImage", croppedImage);
       aiStyleStore.setOpenCrop(false);
     } catch (error) {
       console.error(error);
@@ -108,7 +123,11 @@ const AIStyles = () => {
                   <img
                     src={aiStyleStore.formFields.capturedImage}
                     alt="Captured"
-                    style={{ width: "10rem", height: "10rem", borderRadius: "50%" }}
+                    style={{
+                      width: "10rem",
+                      height: "10rem",
+                      borderRadius: "50%",
+                    }}
                   />
                 ) : (
                   <CameraAltIcon style={{ fontSize: "10rem" }} />
@@ -126,7 +145,7 @@ const AIStyles = () => {
                 id="file-upload"
                 type="file"
                 accept="image/*"
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 onChange={handleFileInputChange}
               />
             </CameraIconBox>
@@ -143,8 +162,17 @@ const AIStyles = () => {
         </SubContainer>
       </Container>
 
-      <Modal open={aiStyleStore.openCamera} onClose={() => aiStyleStore.setOpenCamera(false)}>
-        <Box display="flex" justifyContent="center" alignItems="center" height="100vh" flexDirection="column">
+      <Modal
+        open={aiStyleStore.openCamera}
+        onClose={() => aiStyleStore.setOpenCamera(false)}
+      >
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+          flexDirection="column"
+        >
           <Box
             display="flex"
             justifyContent="center"
@@ -161,16 +189,31 @@ const AIStyles = () => {
               screenshotFormat="image/jpeg"
               width={300}
               height={300}
-              style={{ borderRadius: '50%' }}
+              style={{ borderRadius: "50%" }}
             />
           </Box>
-          <Button onClick={capture} variant="contained" style={{ marginTop: '20px' }}>Capture</Button>
+          <Button
+            onClick={capture}
+            variant="contained"
+            style={{ marginTop: "20px" }}
+          >
+            Capture
+          </Button>
         </Box>
       </Modal>
 
       {aiStyleStore.formFields.capturedImage && (
-        <Modal open={aiStyleStore.openCrop} onClose={() => aiStyleStore.setOpenCrop(false)}>
-          <Box display="flex" justifyContent="center" alignItems="center" height="100vh" flexDirection="column">
+        <Modal
+          open={aiStyleStore.openCrop}
+          onClose={() => aiStyleStore.setOpenCrop(false)}
+        >
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="100vh"
+            flexDirection="column"
+          >
             <Box position="relative" width={250} height={250} bgcolor="black">
               <Cropper
                 image={aiStyleStore.formFields.capturedImage}
@@ -182,7 +225,13 @@ const AIStyles = () => {
                 onCropComplete={onCropComplete}
               />
             </Box>
-            <Button onClick={handleSaveCroppedImage} variant="contained" style={{ marginTop: '20px' }}>Save</Button>
+            <Button
+              onClick={handleSaveCroppedImage}
+              variant="contained"
+              style={{ marginTop: "20px" }}
+            >
+              Save
+            </Button>
           </Box>
         </Modal>
       )}

@@ -12,7 +12,6 @@ export const Container = styled(Box)(({ theme }) => ({
   alignItems: "center",
 }));
 
-
 export const CustomAiHeading = styled(Box)(({ theme }) => ({
   textAlign: "center",
   marginBottom: theme.spacing(4),
@@ -71,7 +70,7 @@ export const ItemRight = styled(Box)({
   display: "flex",
   justifyContent: "flex-end",
   marginRight: "-33px",
-  marginBottom:"20px",
+  marginBottom: "20px",
   flex: 1,
   zIndex: 3,
 });
@@ -80,9 +79,9 @@ export const Logo = styled("img")({
   height: "95%",
   marginRight: "0",
   zIndex: 3,
-  borderTopLeftRadius:"30px",
-  borderBottomLeftRadius:"30px",
-  marginBottom:"60px"
+  borderTopLeftRadius: "30px",
+  borderBottomLeftRadius: "30px",
+  marginBottom: "60px",
 });
 export const Title = styled(Typography)({
   flexGrow: 1,
@@ -119,10 +118,16 @@ export const UploadButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#ffcc00",
   color: "#000",
   margin: theme.spacing(1),
+  "&:hover": {
+    backgroundColor: "#ffaa00",
+  },
 }));
 
 export const SelectButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#ffcc00",
   color: "#000",
   margin: theme.spacing(1),
+  "&:hover": {
+    backgroundColor: "#ffbb21",
+  },
 }));
