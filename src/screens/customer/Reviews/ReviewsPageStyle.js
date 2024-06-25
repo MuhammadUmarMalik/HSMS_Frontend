@@ -14,3 +14,25 @@ export const CustomAiHeading = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(4),
   padding: theme.spacing(4),
 }));
+
+export const Root = styled(Box)({
+  backgroundColor: "#1a1a3a",
+  minHeight: "100vh",
+  color: "#fff",
+  padding: "20px",
+});
+
+export const Heading = styled("div")({
+  marginBottom: "20px",
+});
+
+export const ReviewCard = styled(Card)({
+  backgroundColor: "#2a2a4a",
+  color: "#fff",
+  marginBottom: "20px",
+});
+
+export const CustomerAvatar = styled(Avatar)({
+  backgroundColor: "#ffcc00",
+});
+

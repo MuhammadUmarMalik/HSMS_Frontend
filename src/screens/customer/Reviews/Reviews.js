@@ -10,7 +10,8 @@ const reviews = [
     id: 1,
     customerName: "John Doe",
     customerAvatar: "/avatars/john.jpg", // Example path to avatar image
-    feedback: "Excellent service! Prompt response and very helpful.",
+    feedback:
+      " game-changer! My facial hair has never looked this sharp. The attention to detail and the cool atmosphere made the experience unforgettable. ",
   },
   {
     id: 2,
@@ -48,9 +49,9 @@ const Reviews = () => {
       style={{
         backgroundColor: "#2a2a4a",
         color: "#fff",
-        padding: "20px",
+        padding: "10px",
         textAlign: "center",
-        width: "80%", // Adjust card width
+        width: "40%", // Adjust card width
         margin: "0 auto", // Center align horizontally
         display: "flex",
         flexDirection: "column",
@@ -64,7 +65,7 @@ const Reviews = () => {
         sx={{
           width: 100, // Adjust avatar size
           height: 100, // Adjust avatar size
-          marginBottom: 10,
+          marginBottom: 5,
         }}
       />
       <Typography variant="h6" gutterBottom>
@@ -78,22 +79,25 @@ const Reviews = () => {
     <Box bgcolor="#1a1a3a" minHeight="100vh" color="#fff" padding="20px">
       <Header />
       <Container>
-        <Box py={4}>
-          <Typography variant="h2" align="center" gutterBottom>
-            Customer Reviews
+        <Box py={2}>
+          <Typography variant="h4" align="center" gutterBottom>
+            WHAT OUR CLIENTS SAY
           </Typography>
           <Typography variant="body1" align="center" gutterBottom>
-            See what our customers are saying about us.
+            Elevate your trim, amplify your style – reallygreatsite, where{" "}
+            <br />
+            barbership meets the extraordinary
           </Typography>
         </Box>
+        <br />
         <Carousel
-          autoPlay={true} // Enable autoplay
-          animation="slide" // Slide animation
-          timeout={5000} // Slide every 5 seconds
-          navButtonsAlwaysVisible={true} // Show navigation buttons always
-          cycleNavigation={true} // Enable cycle navigation
-          indicators={true} // Show slide indicators
-          fullHeightHover={false} // Disable full height hover effect
+          autoPlay={true}
+          animation="slide"
+          timeout={5000}
+          navButtonsAlwaysVisible={true}
+          cycleNavigation={true}
+          indicators={true}
+          fullHeightHover={false}
         >
           {items.map((item, index) => renderCarouselItem(item, index))}
         </Carousel>
