@@ -98,7 +98,7 @@ const CustomerHeader = () => {
               <Title variant="h4">SHAPE YOUR STYLE</Title>
             </CenteredBox>
             <MenuRight>
-              <NavLink to="/customer/hair-style">Hair Styles</NavLink>
+              {/* <NavLink to="/customer/hair-style">Hair Styles</NavLink> */}
               <NavLink to="/customer/reviews">Reviews</NavLink>{" "}
               <NavLink to="/customer/contact">Contact</NavLink>{" "}
               <NavLink to="/customer/appointments">Appointments</NavLink>{" "}

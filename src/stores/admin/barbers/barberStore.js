@@ -1,5 +1,8 @@
-import { makeAutoObservable, runInAction } from 'mobx';
-import { SC } from '../../../services/serverCall'; 
+import { makeAutoObservable, runInAction } from "mobx";
+import { SC } from "../../../services/serverCall";
+import axios from "axios";
+import { baseUrl } from "../../../services/apiCalls";
+import Swal from "sweetalert2";
 
 class BarberStore {
   barbers = [];
@@ -10,11 +13,11 @@ class BarberStore {
   itemsPerPage = 5;
   confirmDelete = false;
   formFields = {
-    name: '',
-    email: '',
-    specialization: '',
-    password: '',
-    role:'barber',
+    name: "",
+    email: "",
+    specialization: "",
+    password: "",
+    role: "barber",
   };
   loading = false;
   error = null;
@@ -22,54 +25,113 @@ class BarberStore {
   constructor() {
     makeAutoObservable(this);
   }
-
+  showError(message) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: message,
+    });
+  }
   async fetchBarbers() {
     this.setLoading(true);
     try {
-      const response = await SC.getCall('/barbers');
-      runInAction(() => {
-        this.barbers = Array.isArray(response.data) ? response.data : [];
-        console.log('Fetched and stored barbers:', this.barbers);
-      });
+      const response = await SC.getCall("/barbers");
+      console.log("helllllllllllo", response.data.data);
+      this.barbers = response.data.data;
     } catch (error) {
       runInAction(() => {
-        this.error = error.message || 'Failed to fetch barbers';
+        this.error = error.message || "Failed to fetch barbers";
         console.error(this.error);
       });
     } finally {
       this.setLoading(false);
+      console.log("usmanaaa", this.barbers);
     }
   }
+  //   const userToken = localStorage.getItem("userToken");
+  //   const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  //   const headers = {
+  //     Authorization: `${userToken}`,
+  //   };
 
+  //   const response = await axios.post(
+  //     `${baseUrl}/barbers`,
+  //     {
+  //       barber: barber,
+  //     },
+  //     { headers }
+  //   );
+  //   if (response.status === 200) {
+  //     console.log("Success usman");
+  //   }
+  // }
 
   async addBarber(barber) {
+    const userTokenString = localStorage.getItem("userToken");
+    const userToken = JSON.parse(userTokenString);
+    const token = userToken.accessToken.token;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     try {
-      const response = await SC.postCall('/barbers', barber);
-      runInAction(() => {
+      const response = await axios.post(`${baseUrl}/barbers`, barber, {
+        headers,
+      });
+
+      if (response.status === 200) {
         this.barbers.push(response.data);
-      });
+        return true; // barber added successfully
+      } else {
+        this.error = "Failed to add barber";
+        this.showError(this.error);
+        return false; // Failed to add barber
+      }
     } catch (error) {
-      runInAction(() => {
-        this.error = error.message || 'Failed to add barber';
-      });
-      throw error;
+      this.error = error.message || "Failed to add barber";
+      this.showError(this.error);
+      return false;
     }
   }
+  // async addBarber(barber) {
+  //   try {
+  //     const response = await SC.postCall("/barbers", barber);
+  //     runInAction(() => {
+  //       this.barbers.push(response.data);
+  //     });
+  //   } catch (error) {
+  //     runInAction(() => {
+  //       this.error = error.message || "Failed to add barber";
+  //     });
+  //     throw error;
+  //   }
+  // }
 
   async updateBarber(id, updatedBarber) {
     try {
-      const response = await SC.putCall(`/barbers/${id}`, updatedBarber);
-      runInAction(() => {
-        const index = this.barbers.findIndex((barber) => barber.id === id);
-        if (index !== -1) {
-          this.barbers[index] = { ...this.barbers[index], ...response.data };
-        }
-      });
+      const userTokenString = localStorage.getItem("userToken");
+      const userToken = JSON.parse(userTokenString);
+      const token = userToken.accessToken.token;
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const response = await axios.put(
+        `${baseUrl}/barbers/${id}`,
+        updatedBarber,
+        { headers }
+      );
+
+      const index = this.barbers.findIndex((barber) => barber.id === id);
+      if (index !== -1) {
+        this.barbers[index] = { ...this.barbers[index], ...response.data };
+        // barberStore.fetchBarbers();
+      }
     } catch (error) {
-      runInAction(() => {
-        this.error = error.message || 'Failed to update barber';
-      });
-      throw error;
+      this.error = error.message || "Failed to update barber";
+      this.showError(this.error);
+      return false;
     }
   }
 
@@ -77,11 +139,11 @@ class BarberStore {
     try {
       await SC.deleteCall(`/barbers/${id}`);
       runInAction(() => {
-        this.barbers = this.barbers.filter(barber => barber.id !== id);
+        this.barbers = this.barbers.filter((barber) => barber.id !== id);
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error.message || 'Failed to delete barber';
+        this.error = error.message || "Failed to delete barber";
       });
       throw error;
     }
@@ -114,6 +176,7 @@ class BarberStore {
 
   setFormField(name, value) {
     this.formFields[name] = value;
+    console.log(name, value);
   }
 
   setFormFields(fields) {
@@ -122,11 +185,11 @@ class BarberStore {
 
   resetFormFields() {
     this.formFields = {
-      name: '',
-      email: '',
-      specialization: '',
-      password: '',
-      role:'barber'
+      name: "",
+      email: "",
+      specialization: "",
+      password: "",
+      role: "barber",
     };
   }
 

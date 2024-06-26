@@ -23,6 +23,7 @@ import barberbarber_man4 from "../../../assests/barber_man4.png";
 import barberbarber_man5 from "../../../assests/barber_man5.png";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
+import { useNavigate } from "react-router-dom";
 
 const BarbersProfile = () => {
   const userToken = localStorage.getItem("userToken");
@@ -40,6 +41,10 @@ const BarbersProfile = () => {
       default:
         return null;
     }
+  };
+  const navigate = useNavigate();
+  const callNavigate = () => {
+    navigate("../customer/appointments");
   };
 
   return (
@@ -67,7 +72,9 @@ const BarbersProfile = () => {
               <Rectangle />
               <Logo src={barberbarber_man2} alt="Logo" />
             </RectangleBox>
-            <BarbeButton variant="contained">Select</BarbeButton>
+            <BarbeButton variant="contained" onClick={callNavigate}>
+              Select
+            </BarbeButton>
             <HeadingBarbes variant="h4">MICHEL</HeadingBarbes>
             <Rating rating={4}>{generateStars(4)}</Rating>
             <Quote>
@@ -81,7 +88,9 @@ const BarbersProfile = () => {
               <Rectangle />
               <Logo src={barberbarber_man3} alt="Logo" />
             </RectangleBox>
-            <BarbeButton variant="contained">Select</BarbeButton>
+            <BarbeButton variant="contained" onClick={callNavigate}>
+              Select
+            </BarbeButton>
             <HeadingBarbes variant="h4">TIM'S</HeadingBarbes>
             <Rating rating={3}>{generateStars(3)}</Rating>
             <Quote>
@@ -92,7 +101,11 @@ const BarbersProfile = () => {
             <RectangleBox>
               <Logo2 src={barberbarber_man1} alt="Logo" />
             </RectangleBox>
-            <BarbeButton style={{ marginTop: "25.3em" }} variant="contained">
+            <BarbeButton
+              onClick={callNavigate}
+              style={{ marginTop: "25.3em" }}
+              variant="contained"
+            >
               Select
             </BarbeButton>
             <HeadingBarbes style={{ marginTop: "19.7em" }} variant="h4">
@@ -108,7 +121,9 @@ const BarbersProfile = () => {
               <Rectangle />
               <Logo src={barberbarber_man4} alt="Logo" />
             </RectangleBox>
-            <BarbeButton variant="contained">Select</BarbeButton>
+            <BarbeButton variant="contained" onClick={callNavigate}>
+              Select
+            </BarbeButton>
             <HeadingBarbes variant="h4">JAMES</HeadingBarbes>
             <Rating rating={4.5}>{generateStars(4.5)}</Rating>
             <Quote>
@@ -123,7 +138,9 @@ const BarbersProfile = () => {
               <Rectangle />
               <Logo src={barberbarber_man5} alt="Logo" />
             </RectangleBox>
-            <BarbeButton variant="contained">Select</BarbeButton>
+            <BarbeButton variant="contained" onClick={callNavigate}>
+              Select
+            </BarbeButton>
             <HeadingBarbes variant="h4">FRANKLIN</HeadingBarbes>
             <Rating rating={5}>{generateStars(5)}</Rating>
             <Quote>

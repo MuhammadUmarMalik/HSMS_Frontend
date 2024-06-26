@@ -62,9 +62,9 @@ function App() {
 
       {/* Barber routes */}
       <Route element={<ProtectedRoute allowedRoles={["admin", "barber"]} />}>
-        <Route path="/barbers/home" element={<Barbers />} />
+        <Route path="/barbers/dashboard" element={<Barbers />} />
         <Route path="/barbers/dashboard" element={<Dashboard />} />
-        <Route path="/barbers/profile" element={<Profile />} />
+        <Route path="/barbers/profiles" element={<Profile />} />
         <Route path="/barbers/appointments" element={<Appointments />} />
       </Route>
 

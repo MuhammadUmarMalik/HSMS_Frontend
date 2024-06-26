@@ -24,6 +24,7 @@ import ServicesImage5 from "../../../assests/ServicesImage5.png";
 import ServicesImage6 from "../../../assests/ServicesImage6.png";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
+import { useNavigate } from "react-router-dom";
 
 const Services = () => {
   const userToken = localStorage.getItem("userToken");
@@ -41,6 +42,10 @@ const Services = () => {
       default:
         return null;
     }
+  };
+  const navigate = useNavigate();
+  const callNavigate = () => {
+    navigate("../barber/customer/profile");
   };
 
   return (
@@ -63,7 +68,7 @@ const Services = () => {
                 <Quote>
                   Crafting dapper transformations with our signature haircuts.
                 </Quote>
-                <AmountButton>$ 20</AmountButton>
+                <AmountButton onClick={callNavigate}>$ 20</AmountButton>
               </ColumnElements>
             </LeftElement>
             <RightElement>
@@ -72,7 +77,7 @@ const Services = () => {
                 <Quote>
                   Crafting dapper transformations with our signature haircuts.
                 </Quote>
-                <AmountButton>$ 20</AmountButton>
+                <AmountButton onClick={callNavigate}>$ 20</AmountButton>
               </ColumnElements>
             </RightElement>
           </ElementWrapper>
@@ -83,7 +88,7 @@ const Services = () => {
                 <Quote>
                   Crafting dapper transformations with our signature haircuts.
                 </Quote>
-                <AmountButton>$ 20</AmountButton>
+                <AmountButton onClick={callNavigate}>$ 20</AmountButton>
               </ColumnElements>
             </LeftElement>
             <RightElement>
@@ -92,7 +97,7 @@ const Services = () => {
                 <Quote>
                   Crafting dapper transformations with our signature haircuts.
                 </Quote>
-                <AmountButton>$ 20</AmountButton>
+                <AmountButton onClick={callNavigate}>$ 20</AmountButton>
               </ColumnElements>
             </RightElement>
           </ElementWrapper>
@@ -103,7 +108,7 @@ const Services = () => {
                 <Quote>
                   Crafting dapper transformations with our signature haircuts.
                 </Quote>
-                <AmountButton>$ 20</AmountButton>
+                <AmountButton onClick={callNavigate}>$ 20</AmountButton>
               </ColumnElements>
             </LeftElement>
             <RightElement>
@@ -112,7 +117,7 @@ const Services = () => {
                 <Quote>
                   Crafting dapper transformations with our signature haircuts.
                 </Quote>
-                <AmountButton>$ 20</AmountButton>
+                <AmountButton onClick={callNavigate}>$ 20</AmountButton>
               </ColumnElements>
             </RightElement>
           </ElementWrapper>

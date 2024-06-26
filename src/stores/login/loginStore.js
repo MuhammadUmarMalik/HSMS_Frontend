@@ -84,7 +84,7 @@ class LoginStore {
             navigate("/customer/home");
             break;
           case "barber":
-            navigate("/barbers/home");
+            navigate("/barbers/dashboard");
             break;
           default:
             navigate("/unauthorized");

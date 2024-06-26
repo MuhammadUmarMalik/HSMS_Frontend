@@ -33,7 +33,6 @@ export const FormBox = styled(Box)({
   width: "100%",
   maxWidth: "400px",
 });
-
 export const CustomTextField = styled(TextField)({
   marginBottom: "16px",
   "& .MuiInputBase-root": {
@@ -86,8 +85,13 @@ export const CustomFormControl = styled(FormControl)({
   "& .MuiSelect-icon": {
     color: "#fff",
   },
+  "& .Mui-focused .MuiInputLabel-root": {
+    color: "#ffcc00",
+  },
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#ffcc00",
+  },
 });
-
 export const CustomButton = styled(Button)({
   padding: "12px 24px",
   textTransform: "none",

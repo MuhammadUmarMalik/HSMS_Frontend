@@ -97,7 +97,7 @@ const BarberPage = observer(() => {
   return (
     <>
       <Container>
-      {renderHeader()}
+        {renderHeader()}
         <Typography variant="h4">Barbers</Typography>
         <CustomButton variant="contained" color="primary" onClick={handleOpen}>
           Add New
@@ -107,25 +107,27 @@ const BarberPage = observer(() => {
             <Image src={barberImage} alt="No barbers" />
             <Typography>No barbers at this time</Typography>
           </NoBarbersContainer>
+        ) : barberStore.loading ? (
+          "loading..."
         ) : (
           <>
             <TableContainer component={Paper}>
-              <Table>
+              <Table style={{ backgroundColor: "#1a1a3a", color: "#fff" }}>
                 <TableHead>
                   <TableRow>
-                    <TableCell>
+                    <TableCell style={{ color: "#ADD8E6" }}>
                       <strong>Name</strong>
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ color: "#ADD8E6" }}>
                       <strong>Email</strong>
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ color: "#ADD8E6" }}>
                       <strong>Specialization</strong>
                     </TableCell>
-                    <TableCell>
+                    {/* <TableCell style={{ color: "#ADD8E6" }}>
                       <strong>Password</strong>
-                    </TableCell>
-                    <TableCell>
+                    </TableCell> */}
+                    <TableCell style={{ color: "#ADD8E6" }}>
                       <strong>Actions</strong>
                     </TableCell>
                   </TableRow>
@@ -133,10 +135,18 @@ const BarberPage = observer(() => {
                 <TableBody>
                   {barberStore.barbersToShow.map((barber) => (
                     <TableRow key={barber.id}>
-                      <TableCell>{barber.name}</TableCell>
-                      <TableCell>{barber.email}</TableCell>
-                      <TableCell>{barber.specialization}</TableCell>
-                      <TableCell>{barber.password}</TableCell>
+                      <TableCell style={{ color: "#fff" }}>
+                        {barber.name}
+                      </TableCell>
+                      <TableCell style={{ color: "#fff" }}>
+                        {barber.email}
+                      </TableCell>
+                      <TableCell style={{ color: "#fff" }}>
+                        {barber.specialization}
+                      </TableCell>
+                      {/* <TableCell style={{ color: "#fff" }}>
+                        {barber.password}
+                      </TableCell> */}
                       <TableCell>
                         <IconButton onClick={() => handleEdit(barber)}>
                           <Edit style={{ color: "green" }} />
@@ -150,6 +160,7 @@ const BarberPage = observer(() => {
                 </TableBody>
               </Table>
             </TableContainer>
+
             <StyledPagination
               count={barberStore.totalPages}
               page={barberStore.page}

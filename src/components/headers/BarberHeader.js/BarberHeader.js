@@ -33,9 +33,9 @@ const BarberHeader = () => {
   };
 
   const menuItems = [
-    { text: "Home", link: "/barbers/home" },
-    { text: "Dashboard", link: "/barbers/home" },
-    { text: "Profile", link: "/barbers/profile" },
+    { text: "Home", link: "/barbers/dashboard" },
+    { text: "Dashboard", link: "/barbers/dashboard" },
+    { text: "Profile", link: "/barbers/profiles" },
     { text: "Appointments", link: "/barbers/appointments" },
   ];
 
@@ -84,8 +84,8 @@ const BarberHeader = () => {
               </Menu>
             </Box>
             <MenuLeft>
-              <NavLink to="/barbers/home">Home</NavLink>
-              <NavLink to="/barbers/appointments">Appointments</NavLink>
+              <NavLink to="/barbers/dashboard">Home</NavLink>
+              <NavLink to="/barbers/dashboard">Dashboard</NavLink>
 
             </MenuLeft>
             <CenteredBox>
@@ -93,15 +93,17 @@ const BarberHeader = () => {
               <Title variant="h4">SHAPE YOUR STYLE</Title>
             </CenteredBox>
             <MenuRight>
-              <NavLink to="/barbers/profile">Profile</NavLink>
-              <NavLink to="/barbers/contact">Contact US</NavLink>
+              <NavLink to="/barbers/profiles">Profile</NavLink>
+              <NavLink to="/barbers/appointments">Appointments</NavLink>
+
+              {/* <NavLink to="/barbers/contact">Contact US</NavLink> */}
 
             </MenuRight>
           </Toolbar>
         </AppBar>
-        <OutletDesign>
+        {/* <OutletDesign>
           <Outlet />
-        </OutletDesign>
+        </OutletDesign> */}
       </Container>
     </>
   );
@@ -138,7 +140,7 @@ export default BarberHeader;
 //   const menuItems = [
 //     { text: 'Home', link: '/barbers/home' },
 //     { text: 'Dashboard', link: '/barbers/home' },
-//     { text: 'Profile', link: '/barbers/profile' },
+//     { text: 'Profile', link: '/barbers/profiles' },
 //     { text: 'Appointments', link: '/barbers/appointments' },
 //   ];
 
@@ -171,7 +173,7 @@ export default BarberHeader;
 //               <Title variant="h4">SHAPE YOUR STYLE</Title>
 //             </Box>
 //             <MenuRight>
-//               <NavLink to="/barbers/profile">Profile</NavLink>
+//               <NavLink to="/barbers/profiles">Profile</NavLink>
 //               <NavLink to="/barbers/appointments">Appointments</NavLink>
 //             </MenuRight>
 //           </Toolbar>
