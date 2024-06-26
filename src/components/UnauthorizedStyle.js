@@ -18,3 +18,4 @@ export const CustomAiHeading = styled(Box)(({ theme }) => ({
   padding: theme.spacing(4),
   marginTop: "2.4rem",
 }));
+    
