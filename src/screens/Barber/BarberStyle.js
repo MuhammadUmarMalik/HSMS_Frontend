@@ -11,6 +11,8 @@ export const Container = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  width: "100%",
+  overflow:"hidden"
 }));
 
 export const CustomAiHeading = styled(Box)(({ theme }) => ({

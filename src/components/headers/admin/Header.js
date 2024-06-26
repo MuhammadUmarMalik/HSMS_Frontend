@@ -21,7 +21,7 @@ import { NavLink } from "../../../screens/admin/home/HomeStyles";
 import logo from "../../../assests/logo.png";
 import { Outlet } from "react-router-dom";
 
-const Header = () => {
+const AdminHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenuOpen = (event) => {
@@ -34,12 +34,10 @@ const Header = () => {
 
   const menuItems = [
     { text: "Home", link: "/home" },
-    { text: "AI Styles", link: "/AIStyles" },
-    { text: "Services", link: "/services" },
-    { text: "barber", link: "/barber" },
-    { text: "Barbers Profile", link: "/profile" },
-    { text: "Hair Style", link: "/hair-style" },
-    { text: "reviews", link: "/reviews" },
+    { text: "barber", link: "/barber" }, // add barber page
+    { text: "Admin Barber", link: "/barbers/home" }, // calendar
+    { text: "Barbers Profile", link: "/barbers/profile" }, // barbers profile list
+    { text: "reviews", link: "/reviews" }, // customer reviews
   ];
 
   return (
@@ -87,17 +85,15 @@ const Header = () => {
           </Box>
           <MenuLeft>
             <NavLink to="/home">Home</NavLink>
-            <NavLink to="/AIStyles">AI Styles</NavLink>
-            <NavLink to="/services">Services</NavLink>
-            <NavLink to="/barber">Barbers</NavLink>
+            <NavLink to="/barber">Barber</NavLink>
+            <NavLink to="/barbers/home">Admin Barbers</NavLink>
           </MenuLeft>
           <CenteredBox>
             <Logo src={logo} alt="Logo" />
             <Title variant="h4">SHAPE YOUR STYLE</Title>
           </CenteredBox>
           <MenuRight>
-            <NavLink to="/profile">Barber's Profile</NavLink>
-            <NavLink to="/hair-style">Hair Styles</NavLink>
+            <NavLink to="/barbers/profile">Barbers Profile</NavLink>
             <NavLink to="/reviews">Reviews</NavLink>{" "}
           </MenuRight>
         </Toolbar>
@@ -109,7 +105,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default AdminHeader;
 
 // import React from 'react';
 // import { AppBar, Toolbar, Box } from '@mui/material';

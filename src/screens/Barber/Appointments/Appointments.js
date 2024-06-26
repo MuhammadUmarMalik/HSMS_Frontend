@@ -20,11 +20,33 @@ import {
 } from "./AppointmentStyle";
 import { Typography, IconButton } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
+import AdminHeader from "../../../components/headers/admin/Header";
+import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
+import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
 
 const Appointments = observer(() => {
+  const userToken = localStorage.getItem("userToken");
+  const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  const role = userTokenObj ? userTokenObj.role : null;
+
+  const renderHeader = () => {
+    switch (role) {
+      case "admin":
+        return <AdminHeader />;
+      case "customer":
+        return <CustomerHeader />;
+      case "barber":
+        return <BarberHeader />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Container>
+        {renderHeader()}
+
         <CustomAiHeading>
           <Typography variant="h4">Appointments</Typography>
         </CustomAiHeading>

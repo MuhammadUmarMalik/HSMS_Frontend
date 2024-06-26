@@ -24,6 +24,7 @@ import Cropper from "react-easy-crop";
 import { observer } from "mobx-react";
 import { aiStyleStore } from "../../../stores/AIStyleStore/AIStyleStore";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
+import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
 
 const AIStyles = () => {
   const webcamRef = React.useRef(null);
@@ -99,11 +100,28 @@ const AIStyles = () => {
       aiStyleStore.setUploadedFile(file);
     }
   };
+  const userToken = localStorage.getItem("userToken");
+  const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  const role = userTokenObj ? userTokenObj.role : null;
+
+  const renderHeader = () => {
+    switch (role) {
+      case "admin":
+        return <AdminHeader />;
+      case "customer":
+        return <CustomerHeader />;
+      case "barber":
+        return <BarberHeader />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
       <Container>
-        <CustomerHeader />
+        {renderHeader()}
+
         <CustomAiHeading>
           <Typography variant="h4">Ai Recommendation Styles</Typography>
         </CustomAiHeading>

@@ -1,6 +1,8 @@
 import { makeObservable, observable, action, runInAction } from "mobx";
 import { SC } from "../../services/serverCall";
 import userStore from "../users/usersStore";
+import { baseUrl } from "../../services/apiCalls";
+import axios from "axios";
 
 class LoginStore {
   formFields = {
@@ -47,25 +49,47 @@ class LoginStore {
   async login(navigate) {
     this.setLoading(true);
     try {
-      const response = await SC.postCall("/user_login", this.formFields);
+      // baseUrl=http://127.0.0.1:3333/api;
+      // const response = await SC.postCall("/user_login", this.formFields);
+      const response = await axios.post(
+        `${baseUrl}/user_login`,
+        this.formFields
+      );
       console.log("Response Data:", response.data);
       if (
         response.data &&
         response.data.data &&
-        response.data.data.user &&
-        response.data.data.token
+        // response.data.data.user && //not received from user
+        response.data.data.role &&
+        response.data.data.token &&
+        response.data.data.role
       ) {
-        const { user, token } = response.data.data;
+        console.log("usman", response.data);
+        const { role, token } = response.data.data;
         localStorage.setItem(
           "userToken",
-          JSON.stringify({ accessToken: token, role: user.role })
+          JSON.stringify({ accessToken: token, role: role })
         );
         runInAction(() => {
-          userStore.setUser(user);
+          // userStore.setUser(user);
           userStore.setToken(token);
-          userStore.setRole(user.role);
+          userStore.setRole(role);
         });
-        navigate("/home");
+        // navigate("/home");
+        switch (role) {
+          case "admin":
+            navigate("/home");
+            break;
+          case "customer":
+            navigate("/customer/home");
+            break;
+          case "barber":
+            navigate("/barbers/home");
+            break;
+          default:
+            navigate("/unauthorized");
+            break;
+        }
       } else {
         throw new Error("Invalid response from server");
       }

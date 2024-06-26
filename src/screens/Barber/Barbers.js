@@ -14,12 +14,15 @@ import {
   TaskSwitch,
   TaskIcon,
   TaskInfo,
-  HeaderContainer
+  HeaderContainer,
 } from "./BarberStyle";
 import { Typography, Switch, IconButton } from "@mui/material";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 import { BarChart, DonutLarge, Equalizer } from "@mui/icons-material";
-import TuneIcon from '@mui/icons-material/Tune';
+import TuneIcon from "@mui/icons-material/Tune";
+import AdminHeader from "../../components/headers/admin/Header";
+import CustomerHeader from "../../components/headers/customer-header/CustomerHeader";
+import BarberHeader from "../../components/headers/BarberHeader.js/BarberHeader";
 
 const Barbers = observer(() => {
   const onDateChange = (date) => {
@@ -32,10 +35,28 @@ const Barbers = observer(() => {
       alert("Selected date cannot be in the past");
     }
   };
+  const userToken = localStorage.getItem("userToken");
+  const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  const role = userTokenObj ? userTokenObj.role : null;
+
+  const renderHeader = () => {
+    switch (role) {
+      case "admin":
+        return <AdminHeader />;
+      case "customer":
+        return <CustomerHeader />;
+      case "barber":
+        return <BarberHeader />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
       <Container>
+        {renderHeader()}
+
         <CustomAiHeading>
           <Typography variant="h4">Welcome {"Barber.Name"}</Typography>
         </CustomAiHeading>

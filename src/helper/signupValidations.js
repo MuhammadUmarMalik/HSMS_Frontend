@@ -1,36 +1,57 @@
 // signupValidations.js
-import { signUpStore } from '../stores/signup/signupStore';
+import { signUpStore } from "../stores/signup/signupStore";
 
 export const validateSignupForm = () => {
   const { email, name, password, face_shape } = signUpStore.formFields;
+  let isValid = true;
 
-  if (!email || !name || !password || !face_shape) {
-    signUpStore.setError('Please fill in all fields');
-    return false;
+  if (!email) {
+    signUpStore.setFieldError("email", "Please enter your email");
+    isValid = false;
+  } else if (!isValidEmail(email)) {
+    signUpStore.setFieldError("email", "Please enter a valid email");
+    isValid = false;
+  } else {
+    signUpStore.setFieldError("email", "");
   }
 
-  if (!isValidEmail(email)) {
-    signUpStore.setError('Please enter a valid email');
-    return false;
+  if (!name) {
+    signUpStore.setFieldError("name", "Please enter your name");
+    isValid = false;
+  } else if (!isValidUsername(name)) {
+    signUpStore.setFieldError(
+      "name",
+      "The name should contain only characters and spaces"
+    );
+    isValid = false;
+  } else {
+    signUpStore.setFieldError("name", "");
   }
 
-  if (!isValidUsername(name)) {
-    signUpStore.setError('The name should contain only characters and spaces');
-    return false;
+  if (!password) {
+    signUpStore.setFieldError("password", "Please enter your password");
+    isValid = false;
+  } else if (!isValidPassword(password)) {
+    signUpStore.setFieldError(
+      "password",
+      "Password must be at least 6 characters long"
+    );
+    isValid = false;
+  } else {
+    signUpStore.setFieldError("password", "");
   }
 
-  if (!isValidPassword(password)) {
-    signUpStore.setError('Password must be at least 6 characters long');
-    return false;
+  if (!face_shape) {
+    signUpStore.setFieldError("face_shape", "Please select your face shape");
+    isValid = false;
+  } else if (!isValidFaceShape(face_shape)) {
+    signUpStore.setFieldError("face_shape", "Please select a valid face shape");
+    isValid = false;
+  } else {
+    signUpStore.setFieldError("face_shape", "");
   }
 
-  if (!isValidFaceShape(face_shape)) {
-    signUpStore.setError('Please select a valid face shape');
-    return false;
-  }
-
-  signUpStore.setError('');
-  return true;
+  return isValid;
 };
 
 const isValidEmail = (email) => {
@@ -48,6 +69,6 @@ const isValidUsername = (name) => {
 };
 
 const isValidFaceShape = (faceShape) => {
-  const validFaceShapes = ['round', 'oval', 'square', 'heart', 'diamond'];
+  const validFaceShapes = ["round", "oval", "square", "heart", "diamond"];
   return validFaceShapes.includes(faceShape.toLowerCase());
 };

@@ -16,12 +16,12 @@ import {
   MenuLeft,
   MenuRight,
   OutletDesign,
-} from "./HeaderStyles";
+} from "./Appointmentheaderstyle";
 import { NavLink } from "../../../screens/admin/home/HomeStyles";
 import logo from "../../../assests/logo.png";
 import { Outlet } from "react-router-dom";
 
-const CustomerHeader = () => {
+const Appointmentcustomerheader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenuOpen = (event) => {
@@ -36,11 +36,9 @@ const CustomerHeader = () => {
     { text: "Home", link: "/customer/home" },
     { text: "AI Styles", link: "/customer/AIStyles" },
     { text: "Services", link: "/customer/services" },
-    { text: "Hair Style", link: "/customer/hair-style" },
+    { text: "Barbers Profile", link: "/customer/profile" },
+    // { text: "Hair Style", link: "/customer/hair-style" },
     { text: "reviews", link: "/customer/reviews" },
-    { text: "contact", link: "/customer/contact" },
-    { text: "Barbers", link: "/barber/customer/profile" },
-    { text: "appointments", link: "/customer/appointments" },
   ];
 
   return (
@@ -91,17 +89,15 @@ const CustomerHeader = () => {
               <NavLink to="/customer/home">Home</NavLink>
               <NavLink to="/customer/AIStyles">AI Styles</NavLink>
               <NavLink to="/customer/services">Services</NavLink>
-              <NavLink to="/barber/customer/profile">Barbers</NavLink>
             </MenuLeft>
             <CenteredBox>
               <Logo src={logo} alt="Logo" />
               <Title variant="h4">SHAPE YOUR STYLE</Title>
             </CenteredBox>
             <MenuRight>
-              <NavLink to="/customer/hair-style">Hair Styles</NavLink>
+              <NavLink to="/customer/profile">Barber's Profile</NavLink>
+              {/* <NavLink to="/customer/hair-style">Hair Styles</NavLink> */}
               <NavLink to="/customer/reviews">Reviews</NavLink>{" "}
-              <NavLink to="/customer/contact">Contact</NavLink>{" "}
-              <NavLink to="/customer/appointments">Appointments</NavLink>{" "}
             </MenuRight>
           </Toolbar>
         </AppBar>
@@ -113,4 +109,4 @@ const CustomerHeader = () => {
   );
 };
 
-export default CustomerHeader;
+export default Appointmentcustomerheader;

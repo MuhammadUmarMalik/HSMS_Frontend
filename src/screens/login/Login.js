@@ -85,7 +85,7 @@ const LoginPage = observer(() => {
                 onChange={handleChange}
                 required
               />
-              <FormControl
+              {/* <FormControl
                 component="fieldset"
                 style={{ marginBottom: "16px", width: "100%" }}
               >
@@ -123,7 +123,7 @@ const LoginPage = observer(() => {
                     label="Barber"
                   />
                 </RadioGroup>
-              </FormControl>
+              </FormControl> */}
               <CustomLink to="/signup">REGISTER as a New Customer!</CustomLink>
               <StyledButton
                 variant="contained"

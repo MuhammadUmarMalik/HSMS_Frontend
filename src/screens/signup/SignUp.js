@@ -1,6 +1,6 @@
 // SignupPage.js
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,11 +10,14 @@ import {
   ImageContainer,
   StyledTextField,
   StyledButton,
+  StyledFormControl,
 } from "./style";
 import { signUpStore } from "../../stores/signup/signupStore";
 import logo from "../../assests/logo.png";
 import { validateSignupForm } from "../../helper/signupValidations";
 import { toJS } from "mobx";
+
+const validFaceShapes = ["round", "oval", "square", "heart", "diamond"];
 
 const SignupPage = observer(() => {
   const navigate = useNavigate();
@@ -100,17 +103,26 @@ const SignupPage = observer(() => {
                 error={!!signUpStore.errors.password}
                 helperText={signUpStore.errors.password}
               />
-              <StyledTextField
-                name="face_shape"
-                label="Face Shape"
-                variant="outlined"
-                fullWidth
-                value={signUpStore.formFields.face_shape || ""}
-                onChange={handleChange}
-                required
-                error={!!signUpStore.errors.face_shape}
-                helperText={signUpStore.errors.face_shape}
-              />
+              <StyledFormControl variant="outlined" fullWidth required error={!!signUpStore.errors.face_shape}>
+                <InputLabel>Face Shape</InputLabel>
+                <Select
+                  name="face_shape"
+                  value={signUpStore.formFields.face_shape || ""}
+                  onChange={handleChange}
+                  label="Face Shape"
+                >
+                  {validFaceShapes.map((shape) => (
+                    <MenuItem key={shape} value={shape}>
+                      {shape}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {signUpStore.errors.face_shape && (
+                  <Typography color="error" variant="body2">
+                    {signUpStore.errors.face_shape}
+                  </Typography>
+                )}
+              </StyledFormControl>
               <StyledButton
                 variant="contained"
                 color="primary"

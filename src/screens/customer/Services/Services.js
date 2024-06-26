@@ -23,12 +23,31 @@ import ServicesImage4 from "../../../assests/ServicesImage4.png";
 import ServicesImage5 from "../../../assests/ServicesImage5.png";
 import ServicesImage6 from "../../../assests/ServicesImage6.png";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
+import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
 
 const Services = () => {
+  const userToken = localStorage.getItem("userToken");
+  const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  const role = userTokenObj ? userTokenObj.role : null;
+
+  const renderHeader = () => {
+    switch (role) {
+      case "admin":
+        return <AdminHeader />;
+      case "customer":
+        return <CustomerHeader />;
+      case "barber":
+        return <BarberHeader />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Container>
-        <CustomerHeader />
+        {renderHeader()}
+
         <ServicesHeading>
           <Typography style={{ fontWeight: "bold" }} variant="h4">
             Professional Services

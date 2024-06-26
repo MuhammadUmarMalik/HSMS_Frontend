@@ -4,6 +4,9 @@ import React from "react";
 import { Box, Typography, Container, Paper, Avatar } from "@mui/material";
 import Header from "../../../components/headers/admin/Header"; // Adjust the path based on your project structure
 import Carousel from "react-material-ui-carousel"; // Import the carousel component
+import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
+import AdminHeader from "../../../components/headers/admin/Header";
+import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
 
 const reviews = [
   {
@@ -75,9 +78,27 @@ const Reviews = () => {
     </Paper>
   );
 
+  const userToken = localStorage.getItem("userToken");
+  const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  const role = userTokenObj ? userTokenObj.role : null;
+
+  const renderHeader = () => {
+    switch (role) {
+      case "admin":
+        return <AdminHeader />;
+      case "customer":
+        return <CustomerHeader />;
+      case "barber":
+        return <BarberHeader />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <Box bgcolor="#1a1a3a" minHeight="100vh" color="#fff" padding="20px">
-      <Header />
+    <Box bgcolor="#1a1a3a" minHeight="100vh" color="#fff">
+      {renderHeader()}
+
       <Container>
         <Box py={2}>
           <Typography variant="h4" align="center" gutterBottom>

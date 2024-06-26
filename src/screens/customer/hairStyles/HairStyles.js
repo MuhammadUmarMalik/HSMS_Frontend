@@ -1,7 +1,6 @@
 // src/screens/hairstyles/HairStylesPage.js
 import React from "react";
 import {
-  Container,
   Typography,
   Grid,
   CardContent,
@@ -11,9 +10,11 @@ import {
 import { Save as SaveIcon } from "@mui/icons-material";
 import { observer } from "mobx-react";
 import { hairStylesData } from "./hairStylesData.js";
-import { StyledCard } from "./HairStylesStyle.js";
+import { Container, StyledCard } from "./HairStylesStyle.js";
 import { hairStylesStore } from "../../../stores/hairStyles/HairStylesStore.js";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader.js";
+import AdminHeader from "../../../components/headers/admin/Header.js";
+import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader.js";
 
 const HairStyles = observer(() => {
   const { savedStyles, toggleSaveStyle } = hairStylesStore;
@@ -22,12 +23,36 @@ const HairStyles = observer(() => {
     toggleSaveStyle(id);
   };
 
+  const userToken = localStorage.getItem("userToken");
+  const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  const role = userTokenObj ? userTokenObj.role : null;
+
+  const renderHeader = () => {
+    switch (role) {
+      case "admin":
+        return <AdminHeader />;
+      case "customer":
+        return <CustomerHeader />;
+      case "barber":
+        return <BarberHeader />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Container
-      // style={{ backgroundColor: "#1a1a3a", width: "100%", height: "100vh" }}
+    // style={{ backgroundColor: "#1a1a3a", width: "100%", height: "100vh" }}
     >
-      <CustomerHeader />
-      <Typography variant="h4" gutterBottom>
+      {renderHeader()}
+
+      <Typography
+        variant="h4"
+        gutterBottom
+        style={{
+          marginTop: "6rem",
+        }}
+      >
         Our Hair Styles
       </Typography>
       <Grid container spacing={2}>
