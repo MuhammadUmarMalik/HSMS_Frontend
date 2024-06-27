@@ -7,12 +7,12 @@ import Carousel from "react-material-ui-carousel"; // Import the carousel compon
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 import AdminHeader from "../../../components/headers/admin/Header";
 import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
-
+import barber_man1 from "./../../../assests/barber_man1.png";
 const reviews = [
   {
     id: 1,
     customerName: "John Doe",
-    customerAvatar: "/avatars/john.jpg", // Example path to avatar image
+    customerAvatar: "src/assets/barber_man1.png", // Example path to avatar image
     feedback:
       " game-changer! My facial hair has never looked this sharp. The attention to detail and the cool atmosphere made the experience unforgettable. ",
   },
@@ -62,18 +62,22 @@ const Reviews = () => {
         alignItems: "center",
       }}
     >
-      <Avatar
-        alt={item.customerName}
+      <img
+        src={barber_man1}
+        style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 5 }}
+      />
+      {/* <Avatar
         src={item.customerAvatar}
         sx={{
           width: 100, // Adjust avatar size
           height: 100, // Adjust avatar size
           marginBottom: 5,
         }}
-      />
+      /> */}
       <Typography variant="h6" gutterBottom>
         {item.customerName}
       </Typography>
+
       <Typography variant="body1">{item.feedback}</Typography>
     </Paper>
   );
