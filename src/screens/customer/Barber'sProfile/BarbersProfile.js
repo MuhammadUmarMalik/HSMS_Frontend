@@ -44,7 +44,10 @@ const BarbersProfile = () => {
   };
   const navigate = useNavigate();
   const callNavigate = () => {
-    navigate("../customer/appointments");
+    if (role !== "admin") {
+      // Only customer can navigate
+      navigate("../customer/appointments");
+    }
   };
 
   return (
