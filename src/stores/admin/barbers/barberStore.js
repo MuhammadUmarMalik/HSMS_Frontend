@@ -32,6 +32,22 @@ class BarberStore {
       text: message,
     });
   }
+  async fetchSpecificBarber() {
+    this.setLoading(true);
+    try {
+      const response = await SC.getCall("/profile");
+      console.log("yellos resspoinse", response.data.data);
+      this.barbers = response.data.data;
+    } catch (error) {
+      runInAction(() => {
+        this.error = error.message || "Failed to fetch barbers";
+        console.error(this.error);
+      });
+    } finally {
+      this.setLoading(false);
+      console.log("usmanaaa", this.barbers);
+    }
+  }
   async fetchBarbers() {
     this.setLoading(true);
     try {
@@ -178,7 +194,12 @@ class BarberStore {
     this.formFields[name] = value;
     console.log(name, value);
   }
-
+  setData() {
+    this.formFields.name = this.barbers?.name;
+    this.formFields.email = this.barbers?.email;
+    this.formFields.specialization = this.barbers?.specialization;
+    console.log("oye", this.formFields);
+  }
   setFormFields(fields) {
     this.formFields = { ...fields };
   }

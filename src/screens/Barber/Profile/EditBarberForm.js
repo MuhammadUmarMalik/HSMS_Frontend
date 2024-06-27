@@ -27,8 +27,17 @@ const EditBarberForm = () => {
   };
 
   const handleUpdate = () => {
+    if (
+      !editBarberStore.formFields.email ||
+      !editBarberStore.formFields.name ||
+      !editBarberStore.formFields.password
+    ) {
+      console.log("returning");
+      return;
+    }
     console.log(editBarberStore.formFields);
     console.log("handleUpdate function");
+    editBarberStore.updateBarber();
   };
 
   const isValidTime = (start, end) => {
@@ -36,9 +45,9 @@ const EditBarberForm = () => {
     const [startHour, startMinute] = start.split(":").map(Number);
     const [endHour, endMinute] = end.split(":").map(Number);
     return (
-      (endHour > startHour) ||
+      endHour > startHour ||
       (endHour === startHour && endMinute > startMinute) ||
-      (endHour < startHour)
+      endHour < startHour
     );
   };
 
@@ -86,12 +95,12 @@ const EditBarberForm = () => {
         <StyledTextField
           required
           fullWidth
-          label="Password"
+          label="Type your new password"
           name="password"
           value={editBarberStore.formFields.password}
           onChange={handleChange}
         />
-        <StyledTextField
+        {/* <StyledTextField
           required
           fullWidth
           label="Start Hours"
@@ -108,7 +117,7 @@ const EditBarberForm = () => {
           name="endhours"
           value={editBarberStore.formFields.endhours}
           onChange={handleEndHourChange}
-        />
+        /> */}
       </FormContainer>
       <ButtonContainer>
         <StyledButton
@@ -122,8 +131,16 @@ const EditBarberForm = () => {
           Cancel
         </StyledCancelButton>
       </ButtonContainer>
-      <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="error" sx={{ width: '100%' }}>
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert
+          onClose={handleCloseAlert}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
           {alertMessage}
         </Alert>
       </Snackbar>

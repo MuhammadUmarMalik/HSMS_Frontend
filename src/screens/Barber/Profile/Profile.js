@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   CustomAiHeading,
@@ -27,12 +27,30 @@ import { observer } from "mobx-react-lite";
 import AdminHeader from "../../../components/headers/admin/Header";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
+import barberStore from "../../../stores/admin/barbers/barberStore";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const [auth, setAuth] = useState(localStorage.getItem("userToken"));
+
+  const navigate = useNavigate();
+
   const handleOpen = () => editBarberStore.setOpenModal(true);
+  useEffect(() => {
+    const fetchBarbersData = async () => {
+      try {
+        await barberStore.fetchSpecificBarber();
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchBarbersData();
+  }, []);
 
   const handleEdit = (barber) => {
     // editBarberStore.setCurrentBarber(barber);
+    editBarberStore.setData();
     handleOpen();
   };
 
@@ -63,6 +81,18 @@ const Profile = () => {
     }
   };
 
+  // const navigateToLogin = async () => {
+  //   await localStorage.clear();
+  //   const data = await localStorage.getItem("userToken");
+  //   if (!data) {
+  //     navigate("../login");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("userToken");
+  //   setAuth(token);
+  // }, [auth]);
   return (
     <>
       <Container>
@@ -77,31 +107,28 @@ const Profile = () => {
               Basic Info
             </h3>
             <h4 style={{ display: "flex", flexDirection: "row" }}>
-              <span>Name: </span>
+              {/* <span>Name: </span> */}
               <span onClick={() => handleEdit()} style={{ cursor: "pointer" }}>
-                {"  "}
-                Barber.Name
+                Name: {("  ", barberStore.barbers?.name)}
               </span>
             </h4>
             <h4 style={{ display: "flex", flexDirection: "row" }}>
-              <span>Email: </span>
               <span onClick={() => handleEdit()} style={{ cursor: "pointer" }}>
-                {"  "}
-                Barber.Email
+                Email: {("  ", barberStore.barbers?.email)}
               </span>
             </h4>
             <h4 style={{ display: "flex", flexDirection: "row" }}>
-              <span>Password: </span>
+              {/* <span>Password: </span> */}
               <span onClick={() => handleEdit()} style={{ cursor: "pointer" }}>
                 {"  "}
-                Barber.Password
+                Password: {("  ", "********")}
               </span>
             </h4>
 
-            <h3 style={{ textDecoration: "underline", color: "#ffcc00" }}>
+            {/* <h3 style={{ textDecoration: "underline", color: "#ffcc00" }}>
               Change Working Hours
             </h3>
-            <h4>Set Hours: {" Barber.StartHour to Barber.EndHour "}</h4>
+            <h4>Set Hours: {" Barber.StartHour to Barber.EndHour "}</h4> */}
           </ItemLeft>
           <ItemCenter>
             <ProfileBox>
@@ -110,11 +137,11 @@ const Profile = () => {
               </ProfileIcon>
             </ProfileBox>
             <h1>
-              <LogoutButton
-                variant="contained"
-                //   onClick={handleUploadClick}
-              >
+              {/* <LogoutButton variant="contained" onClick={navigateToLogin}>
                 Logout
+              </LogoutButton> */}
+              <LogoutButton variant="contained" onClick={() => handleEdit()}>
+                Edit Profile
               </LogoutButton>
             </h1>
           </ItemCenter>

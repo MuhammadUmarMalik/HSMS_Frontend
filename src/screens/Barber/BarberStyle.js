@@ -12,7 +12,7 @@ export const Container = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   width: "100%",
-  overflow:"hidden"
+  overflow: "hidden",
 }));
 
 export const CustomAiHeading = styled(Box)(({ theme }) => ({
@@ -67,7 +67,7 @@ export const ItemRight = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: "5rem",
+  marginTop: "3.6rem",
   padding: theme.spacing(2),
   backgroundColor: "#2a2a5a",
   borderRadius: "8px",
@@ -93,6 +93,7 @@ export const CalendarContainer = styled(Box)(({ theme }) => ({
   "& .react-calendar": {
     color: "#000",
     border: "none",
+    width: "30rem",
   },
   "& .react-calendar__navigation button": {
     color: "#000",

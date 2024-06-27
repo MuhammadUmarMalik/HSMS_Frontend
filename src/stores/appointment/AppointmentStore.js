@@ -10,11 +10,11 @@ class AppointmentStore {
     date: "",
     time: "",
     barber_id: "",
-
   };
   errors = "";
   loading = false;
   barbers = [];
+  appointments = [];
   constructor() {
     makeObservable(this, {
       formFields: observable,
@@ -50,6 +50,25 @@ class AppointmentStore {
     } finally {
       this.setLoading(false);
       console.log("usmanaaa", this.barbers);
+    }
+  }
+
+  async fetchAppointments() {
+    this.setLoading(true);
+    try {
+      const response = await SC.getCall("/barber_appointments");
+      console.log("jjjjjjjjjj", response.data);
+      console.log("gttt appointments", response.data.data);
+      this.appointments = response.data.data;
+      return this.appointments;
+    } catch (error) {
+      runInAction(() => {
+        this.error = error.message || "Failed to fetch barbers";
+        console.error(this.error);
+      });
+    } finally {
+      this.setLoading(false);
+      console.log("usmanaaa appointments", this.appointments);
     }
   }
 

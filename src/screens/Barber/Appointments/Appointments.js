@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import AppointmentsImage from "../../../assests/Appointments.PNG";
@@ -18,13 +18,17 @@ import {
   TaskStatus,
   Logo,
 } from "./AppointmentStyle";
-import { Typography, IconButton } from "@mui/material";
-import { MoreHoriz } from "@mui/icons-material";
+import { Typography, Menu, MenuItem } from "@mui/material";
+import { MoreHoriz, ArrowDropDown } from "@mui/icons-material";
 import AdminHeader from "../../../components/headers/admin/Header";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
 import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
+import appointmentStore from "../../../stores/appointment/AppointmentStore";
 
 const Appointments = observer(() => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [appointments, setAppointments] = useState([]);
+  // appointment
   const userToken = localStorage.getItem("userToken");
   const userTokenObj = userToken ? JSON.parse(userToken) : null;
   const role = userTokenObj ? userTokenObj.role : null;
@@ -42,6 +46,27 @@ const Appointments = observer(() => {
     }
   };
 
+  useEffect(() => {
+    const fetchBarbersData = async () => {
+      try {
+        const appointment = await appointmentStore.fetchAppointments();
+        setAppointments(appointment);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchBarbersData();
+  }, []);
+
+  const handleShowAllClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <Container>
@@ -53,16 +78,6 @@ const Appointments = observer(() => {
         <CalendTaskContainer>
           <ItemLeft>
             <CalendarContainer>
-              {/* <Typography
-                variant="h4"
-                style={{
-                  color: "#ffcc00",
-                  textAlign: "center",
-                  marginBottom: "1rem",
-                }}
-              >
-                Calendar
-              </Typography> */}
               <Logo src={AppointmentsImage} alt="Logo" />
             </CalendarContainer>
           </ItemLeft>
@@ -78,29 +93,83 @@ const Appointments = observer(() => {
               Upcoming Tasks
             </Typography>
             <TaskList>
-              <TaskItem>
-                <TaskIcon />
-                <TaskInfo>
-                  <Typography variant="h6">Fringe</Typography>
-                  <Typography variant="body2">5 minutes left</Typography>
-                </TaskInfo>
-                <TaskStatus color="green" />
-              </TaskItem>
-              <TaskItem>
-                <TaskIcon />
-                <TaskInfo>
-                  <Typography variant="h6">Pony</Typography>
-                  <Typography variant="body2">12 hours left</Typography>
-                </TaskInfo>
-                <TaskStatus color="yellow" />
-              </TaskItem>
+              {appointments?.slice(0, 2).map((appointment) => {
+                const [date, time] = appointment.time.split("T");
+
+                return (  
+                  <TaskItem key={appointment.id}>
+                    <TaskIcon />
+                    <TaskInfo>
+                      <Typography variant="h6">
+                        {appointment.customerName}
+                      </Typography>
+                      <Typography variant="body2">
+                        {date} {time.split(".")[0]}
+                      </Typography>
+                    </TaskInfo>
+                    <TaskStatus color="green" />
+                  </TaskItem>
+                );
+              })}
             </TaskList>
-            <ShowAllLink>
-              <Typography variant="body2" style={{ color: "#ffcc00" }}>
-                Show All
-              </Typography>
-              <MoreHoriz style={{ color: "#ffcc00" }} />
-            </ShowAllLink>
+            {appointmentStore.appointments.length > 2 && (
+              <>
+                <ShowAllLink onClick={handleShowAllClick}>
+                  <Typography variant="body2" style={{ color: "#ffcc00" }}>
+                    Show All
+                  </Typography>
+                  <ArrowDropDown style={{ color: "#ffcc00" }} />
+                </ShowAllLink>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  PaperProps={{
+                    style: {
+                      // maxHeight: 48 * 4.5,
+                      // width: "20ch",
+                      maxHeight: "100%",
+                      width: "30%",
+                      // marginTop: "6%",
+                      position: "absolute",
+                      overflowY: "scroll",
+                      maxHeight: "50%",
+                      // paddingLeft:"50rem",
+                      // paddingRight:"10rem",
+                    },
+                  }}
+                  style={{
+                    maxHeight: "100%",
+                    width: "100%",
+                    paddingLeft: "50rem",
+                    paddingRight: "10rem",
+                  }}
+                >
+                  {appointmentStore.appointments
+                    ?.slice(2)
+                    .map((appointment) => {
+                      const [date, time] = appointment.time.split("T");
+
+                      return (
+                        <MenuItem key={appointment.id} onClick={handleClose}>
+                          <TaskItem style={{ width: "100%" }}>
+                            <TaskIcon />
+                            <TaskInfo>
+                              <Typography variant="h6">
+                                {appointment.customerName}
+                              </Typography>
+                              <Typography variant="body2">
+                                {date} {time.split(".")[0]}
+                              </Typography>
+                            </TaskInfo>
+                            <TaskStatus color="green" />
+                          </TaskItem>
+                        </MenuItem>
+                      );
+                    })}
+                </Menu>
+              </>
+            )}
           </ItemRight>
         </CalendTaskContainer>
       </Container>

@@ -47,6 +47,8 @@ class BarbersStore {
     this.loading = loading;
   }
 
+  
+
   async FetchBarber() {
     this.setLoading(true);
     try {
