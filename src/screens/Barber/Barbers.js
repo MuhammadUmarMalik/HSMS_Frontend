@@ -30,10 +30,20 @@ const Barbers = observer(() => {
   const [appointments, setAppointments] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const userToken = localStorage.getItem("userToken");
+  const userTokenObj = userToken ? JSON.parse(userToken) : null;
+  const role = userTokenObj ? userTokenObj.role : null;
+
   useEffect(() => {
     const fetchBarbersData = async () => {
       try {
-        const appointment = await appointmentStore.fetchAppointments();
+        let appointment;
+        if (role === "admin") {
+          appointment = await appointmentStore.fetchAppointmentsAdmin();
+        } else {
+          console.log("else condition");
+          appointment = await appointmentStore.fetchAppointments();
+        }
         setAppointments(appointment);
       } catch (error) {
         console.error("Error:", error);
@@ -42,7 +52,6 @@ const Barbers = observer(() => {
 
     fetchBarbersData();
   }, []);
-
   const handleShowAllClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -67,10 +76,6 @@ const Barbers = observer(() => {
       alert("Selected date cannot be in the past");
     }
   };
-
-  const userToken = localStorage.getItem("userToken");
-  const userTokenObj = userToken ? JSON.parse(userToken) : null;
-  const role = userTokenObj ? userTokenObj.role : null;
 
   const renderHeader = () => {
     switch (role) {
