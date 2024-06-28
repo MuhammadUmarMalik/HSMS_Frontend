@@ -92,17 +92,22 @@ const Reviews = () => {
           </Typography>
         </Box>
         <br />
-        <Carousel
-          autoPlay={true}
-          animation="slide"
-          timeout={5000}
-          navButtonsAlwaysVisible={true}
-          cycleNavigation={true}
-          indicators={true}
-          fullHeightHover={false}
-        >
-          {reviewStore.reviews.map((item) => renderCarouselItem(item))}
-        </Carousel>
+        {reviewStore.reviews?.length > 0 ? (
+          <Carousel
+            autoPlay={true}
+            animation="slide"
+            timeout={5000}
+            navButtonsAlwaysVisible={true}
+            cycleNavigation={true}
+            indicators={true}
+            fullHeightHover={false}
+            style={{ marginTop: "4rem" }}
+          >
+            {reviewStore.reviews.map((item) => renderCarouselItem(item))}
+          </Carousel>
+        ) : (
+          "No reviews to show"
+        )}
         <Modal open={barberStore.openModal} onClose={handleClose}>
           <ModalBox>
             <OpenReviewModal onClose={handleClose} />

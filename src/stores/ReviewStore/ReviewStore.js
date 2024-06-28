@@ -60,7 +60,7 @@ class ReviewStore {
       const response = await SC.getCall("/customer_reviews");
       console.log("helllllllllllo", response.data.data);
       this.reviews = response.data.data;
-      console.log("reviews-----------------",this.reviews)
+      console.log("reviews-----------------", this.reviews);
       return this.reviews;
     } catch (error) {
       runInAction(() => {
@@ -113,6 +113,7 @@ class ReviewStore {
       if (response.status === 200) {
         this.barbers.push(response.data);
         this.showSuccess("Successfully posted your review..");
+        await this.fetchReviews();
         return true; // barber added successfully
       } else {
         this.error = "Failed to add barber";
