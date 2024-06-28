@@ -3,6 +3,7 @@ import { SC } from "../../services/serverCall";
 import userStore from "../users/usersStore";
 import { baseUrl } from "../../services/apiCalls";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 class LoginStore {
   formFields = {
@@ -44,6 +45,13 @@ class LoginStore {
 
   setLoading(loading) {
     this.loading = loading;
+  }
+  showError(message) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: message,
+    });
   }
 
   async login(navigate) {
@@ -98,6 +106,7 @@ class LoginStore {
         this.setError(
           error.response ? error.response.data.message : "Login failed"
         );
+        this.showError("Error..");
         console.log(error);
       });
     } finally {

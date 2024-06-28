@@ -70,6 +70,7 @@ const LoginPage = observer(() => {
                 name="email"
                 label="Email"
                 variant="outlined"
+                type="email"
                 fullWidth
                 value={loginStore.formFields.email}
                 onChange={handleChange}

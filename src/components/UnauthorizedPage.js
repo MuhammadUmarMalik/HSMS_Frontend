@@ -10,7 +10,7 @@ const Unauthorized = () => {
         <CustomAiHeading>
           <h2>Unauthorized Access</h2>
           <h3>You do not have permission to view this page.</h3>
-          <Link to="/login" style={{ color: "blue" }}>
+          <Link to="/" style={{ color: "blue" }}>
             Go to Login
           </Link>
         </CustomAiHeading>

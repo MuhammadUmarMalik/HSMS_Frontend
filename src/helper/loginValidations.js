@@ -8,15 +8,15 @@ export const validateLoginForm = () => {
     return false;
   }
 
-  if (!isValidEmail(email)) {
-    loginStore.setError('Please enter a valid email');
-    return false;
-  }
+  // if (!isValidEmail(email)) {
+  //   loginStore.setError('Please enter a valid email');
+  //   return false;
+  // }
 
-  if (!isValidPassword(password)) {
-    loginStore.setError('Password must be at least 6 characters long');
-    return false;
-  }
+  // if (!isValidPassword(password)) {
+  //   loginStore.setError('Password must be at least 6 characters long');
+  //   return false;
+  // }
 
   loginStore.setError('');
   return true;

@@ -2,6 +2,7 @@
 import { makeObservable, observable, action, runInAction, toJS } from "mobx";
 import { SC } from "../../services/serverCall";
 import userStore from "../users/usersStore";
+import Swal from "sweetalert2";
 
 class SignupStore {
   formFields = {
@@ -58,6 +59,20 @@ class SignupStore {
     this.loading = loading;
   }
 
+  showSuccess(message) {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: message,
+    });
+  }
+  showError(message) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: message,
+    });
+  }
   async signup(navigate) {
     this.setLoading(true);
     try {
@@ -76,8 +91,12 @@ class SignupStore {
           userStore.setToken(token.token);
           userStore.setRole("customer");
         });
-        navigate("/login");
+        navigate("/");
+        this.showSuccess("Successfully customer account created");
+        this.clearFormFields();
       } else {
+        this.showError("Error while creating customer..");
+        this.clearFormFields();
         throw new Error("Invalid response from server");
       }
     } catch (error) {
@@ -86,6 +105,8 @@ class SignupStore {
           ? error.response.data.message
           : "Signup failed";
         this.setError(errorMessage);
+        this.showError("Error while creating customer..");
+        this.clearFormFields();
         console.log("Error Response:", error);
       });
     } finally {

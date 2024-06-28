@@ -26,12 +26,14 @@ const ErrorPage = () => {
 
   return (
     <Container>
-      {renderHeader()}
+      {/* {renderHeader()} */}
 
-      <ErrorHeading>
+      <ErrorHeading style={{ marginTop: "10%" }}>
         <h1>404 - Page Not Found</h1>
       </ErrorHeading>
-      {/* <Link to="/">Go to Login</Link> */}
+      <Link to="/" style={{ color: "blue" }}>
+        Go to Login
+      </Link>
     </Container>
   );
 };

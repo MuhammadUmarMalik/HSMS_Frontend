@@ -21,6 +21,7 @@ import Unauthorized from "./components/UnauthorizedPage";
 import ErrorPage from "./screens/Error/Error"; // Import the ErrorPage component
 import Appointment from "./screens/customer/appointnment/Appointment";
 import CustomerHomePage from "./screens/customer/home/Home";
+import { theme } from "./AppStyle";
 
 function App() {
   const userToken = localStorage.getItem("userToken");
@@ -28,10 +29,11 @@ function App() {
   const role = userTokenObj ? userTokenObj.role : null;
 
   return (
+    // <Routes theme={theme}>
     <Routes>
       {!role ? (
         <>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignupPage />} />
         </>
       ) : null}
