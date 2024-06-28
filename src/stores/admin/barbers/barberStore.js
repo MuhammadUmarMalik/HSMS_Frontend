@@ -32,6 +32,13 @@ class BarberStore {
       text: message,
     });
   }
+  showSuccess(message) {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: message,
+    });
+  }
   async fetchSpecificBarber() {
     this.setLoading(true);
     try {
@@ -97,7 +104,9 @@ class BarberStore {
       });
 
       if (response.status === 200) {
-        this.barbers.push(response.data);
+        // this.barbers.push(response.data);
+        this.showSuccess("Successfully added new barber");
+        this.fetchBarbers();
         return true; // barber added successfully
       } else {
         this.error = "Failed to add barber";

@@ -133,7 +133,7 @@ const BarberPage = observer(() => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {barberStore.barbersToShow.map((barber) => (
+                  {barberStore.barbersToShow?.map((barber) => (
                     <TableRow key={barber.id}>
                       <TableCell style={{ color: "#fff" }}>
                         {barber.name}

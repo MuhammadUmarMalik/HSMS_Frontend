@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react";
 import {
   FormContainer,
@@ -14,14 +14,14 @@ const AddBarberForm = ({ onClose }) => {
     barberStore.setFormField(e.target.name, e.target.value);
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = async () => {
     if (barberStore.currentBarber) {
       barberStore.updateBarber(
         barberStore.currentBarber.id,
         barberStore.formFields
       );
     } else {
-      barberStore.addBarber(barberStore.formFields);
+      await barberStore.addBarber(barberStore.formFields);
     }
     onClose();
     barberStore.resetFormFields();
