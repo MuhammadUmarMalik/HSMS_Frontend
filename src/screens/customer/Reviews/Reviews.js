@@ -1,6 +1,6 @@
 // src/screens/customer/Reviews/Reviews.js
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Container, Paper, Modal } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader";
@@ -14,6 +14,7 @@ import OpenReviewModal from "./OpenReviewModal";
 import reviewStore from "../../../stores/ReviewStore/ReviewStore";
 
 const Reviews = () => {
+  const [reviews, setReviews] = useState([]);
   const handleOpen = () => barberStore.setOpenModal(true);
   const handleClose = () => {
     barberStore.setOpenModal(false);
@@ -67,7 +68,20 @@ const Reviews = () => {
   };
 
   useEffect(() => {
-    reviewStore.fetchReviews();
+    if (role === "admin") {
+      const fetchReviews = async () => {
+        let review = await reviewStore.AdminfetchReviews();
+        setReviews(review);
+      };
+      fetchReviews();
+    } else {
+      const fetchReviews = async () => {
+        setReviews([]);
+        let review = await reviewStore.fetchReviews();
+        setReviews(review);
+      };
+      fetchReviews();
+    }
   }, []);
 
   return (
@@ -75,10 +89,15 @@ const Reviews = () => {
       {renderHeader()}
 
       <Container>
-        <CustomButton variant="contained" color="primary" onClick={handleOpen}>
-          Give Review
-        </CustomButton>
-
+        {role === "admin" ? null : (
+          <CustomButton
+            variant="contained"
+            color="primary"
+            onClick={handleOpen}
+          >
+            Give Review
+          </CustomButton>
+        )}
         <Box py={2}>
           <Typography variant="h4" align="center" gutterBottom>
             WHAT OUR CLIENTS SAY
@@ -92,6 +111,7 @@ const Reviews = () => {
           </Typography>
         </Box>
         <br />
+        {/* {reviews?.length > 0 ? ( */}
         {reviewStore.reviews?.length > 0 ? (
           <Carousel
             autoPlay={true}
@@ -104,9 +124,10 @@ const Reviews = () => {
             style={{ marginTop: "4rem" }}
           >
             {reviewStore.reviews.map((item) => renderCarouselItem(item))}
+            {/* {reviews?.map((item) => renderCarouselItem(item))} */}
           </Carousel>
         ) : (
-          "No reviews to show"
+          "No reviews"
         )}
         <Modal open={barberStore.openModal} onClose={handleClose}>
           <ModalBox>

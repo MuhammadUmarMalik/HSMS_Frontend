@@ -1,5 +1,13 @@
 // App.js
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 import Login from "./screens/login/Login";
 import SignupPage from "./screens/signup/SignUp";
 import HomePage from "./screens/admin/home/Home";
@@ -24,30 +32,76 @@ import CustomerHomePage from "./screens/customer/home/Home";
 import { theme } from "./AppStyle";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const userToken = localStorage.getItem("userToken");
   const userTokenObj = userToken ? JSON.parse(userToken) : null;
   const role = userTokenObj ? userTokenObj.role : null;
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (role && location.pathname === "/") {
+      if (role === "admin") {
+        navigate("/home");
+      } else if (role === "barber") {
+        navigate("/barbers/dashboard");
+      } else if (role === "customer") {
+        navigate("/customer/home");
+      }
+    }
+    setIsLoading(false);
+  }, [role, navigate, location.pathname]);
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
-    // <Routes theme={theme}>
     <Routes>
       {!role ? (
         <>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignupPage />} />
         </>
-      ) : null}
+      ) : (
+        <>
+          {/* Redirect root to home page based on role */}
+          <Route
+            path="/"
+            element={
+              <Navigate
+                to={`/${
+                  role === "admin"
+                    ? "home"
+                    : role === "barber"
+                    ? "barbers/dashboard"
+                    : "customer/home"
+                }`}
+              />
+            }
+          />
+        </>
+      )}
       {/* Admin routes */}
       <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/barber" element={<BarberPage />} />
-        {/*above page is add barber  */}
         <Route path="/barbers/home" element={<Barbers />} />
-        {/*above page is barber home containing calender will also show to admin  */}
         <Route path="/barbers/profile" element={<BarbersProfile />} />
         <Route path="/reviews" element={<Reviews />} />
-        {/* <Route path="/barbers/appointments" element={<Appointments />} /> */}
-        {/* <Route path="/barbers/contact" element={<Contact />} /> */}
       </Route>
 
       {/* Customer routes */}
@@ -65,7 +119,7 @@ function App() {
       {/* Barber routes */}
       <Route element={<ProtectedRoute allowedRoles={["admin", "barber"]} />}>
         <Route path="/barbers/dashboard" element={<Barbers />} />
-        <Route path="/barbers/dashboard" element={<Dashboard />} />
+        {/* <Route path="/barbers/dashboard" element={<Dashboard />} /> */}
         <Route path="/barbers/profiles" element={<Profile />} />
         <Route path="/barbers/appointments" element={<Appointments />} />
       </Route>

@@ -35,6 +35,7 @@ export const FormBox = styled(Box)({
 });
 export const CustomTextField = styled(TextField)({
   marginBottom: "16px",
+  color: "#fff",
   "& .MuiInputBase-root": {
     color: "#fff",
   },
@@ -60,6 +61,20 @@ export const CustomTextField = styled(TextField)({
     "& .MuiSvgIcon-root": {
       color: "#fff",
     },
+  },
+  "& .MuiFormLabel-root": {
+    color: "#fff",
+  },
+  // Styles for the date/time picker icon
+  "& input[type='date']::-webkit-calendar-picker-indicator": {
+    filter: "invert(1)", // This inverts the color of the icon to white
+    fontSize: "25px",
+    cursor: "pointer",
+  },
+  "& input[type='time']::-webkit-calendar-picker-indicator": {
+    filter: "invert(1)", // This inverts the color of the icon to white
+    fontSize: "25px",
+    cursor: "pointer",
   },
 });
 

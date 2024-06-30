@@ -6,15 +6,40 @@ import {
   CardContent,
   CardMedia,
   IconButton,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
 } from "@mui/material";
 import { Save as SaveIcon } from "@mui/icons-material";
 import { observer } from "mobx-react";
 import { hairStylesData } from "./hairStylesData.js";
-import { Container, StyledCard } from "./HairStylesStyle.js";
+import { Container } from "./HairStylesStyle.js";
 import { hairStylesStore } from "../../../stores/hairStyles/HairStylesStore.js";
 import CustomerHeader from "../../../components/headers/customer-header/CustomerHeader.js";
 import AdminHeader from "../../../components/headers/admin/Header.js";
 import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader.js";
+
+import LongFringes from "../../../assests/hair styles/hair style1.png"; // Replace with your actual paths
+import FringeUp from "../../../assests/hair styles/hair style2.png";
+import MidParted from "../../../assests/hair styles/hair style5.png";
+import SideFringe from "../../../assests/hair styles/hair style4.png";
+import Spikes from "../../../assests/hair styles/hair style3.png";
+import CurlySided from "../../../assests/hair styles/hair style6.png";
+import SimpleStyle from "../../../assests/hair styles/hair style7.png";
+import Curly from "../../../assests/hair styles/hair style8.png";
+
+const hairStylesImages = [
+  { name: "Spikes", image: Spikes },
+  { name: "Curly Sided", image: CurlySided },
+  { name: "No Cuts", image: SimpleStyle },
+  { name: "Long Fringes", image: LongFringes },
+  { name: "Fringe Up", image: FringeUp },
+  { name: "Curly", image: Curly },
+  { name: "Side Fringe", image: SideFringe },
+  { name: "Mid Parted", image: MidParted },
+];
 
 const HairStyles = observer(() => {
   const { savedStyles, toggleSaveStyle } = hairStylesStore;
@@ -41,47 +66,96 @@ const HairStyles = observer(() => {
   };
 
   return (
-    <Container
-    // style={{ backgroundColor: "#1a1a3a", width: "100%", height: "100vh" }}
-    >
+    <>
       {renderHeader()}
+      <Container>
+        <Typography
+          variant="h4"
+          gutterBottom
+          style={{
+            fontWeight: "bold",
+            marginTop: "4rem",
+            marginBottom: "2rem",
+          }}
+        >
+          Virtual Closet
+        </Typography>
 
-      <Typography
-        variant="h4"
-        gutterBottom
-        style={{
-          marginTop: "6rem",
-        }}
-      >
-        Our Hair Styles
-      </Typography>
-      <Grid container spacing={2}>
-        {hairStylesData.map((style) => (
-          <Grid item xs={12} sm={6} md={4} key={style.id}>
-            <StyledCard>
-              <CardMedia
-                component="img"
-                height="140"
-                image={style.imageUrl}
-                alt={style.name}
-              />
-              <CardContent>
-                <Typography variant="h6">{style.name}</Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {style.description}
-                </Typography>
-                <IconButton
-                  onClick={() => handleSave(style.id)}
-                  color={savedStyles.includes(style.id) ? "primary" : "default"}
-                >
-                  <SaveIcon />
-                </IconButton>
-              </CardContent>
-            </StyledCard>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={3}>
+            <Typography
+              variant="h6"
+              gutterBottom
+              style={{ width: "271px", color: "#ffcc00", fontWeight: "bold" }}
+            >
+              Select Your Hairstyle Preferences
+            </Typography>
+            <List>
+              {hairStylesImages.map((style, index) => (
+                <ListItem key={index} style={{}}>
+                  <ListItemText primary={style.name} />
+                </ListItem>
+              ))}
+            </List>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                backgroundColor: "#ffbb11",
+              }}
+            >
+              Select
+            </Button>
           </Grid>
-        ))}
-      </Grid>
-    </Container>
+          <Grid item xs={12} md={9}>
+            <Grid container spacing={2}>
+              {hairStylesImages.map((style, index) => (
+                <Grid item xs={6} md={3} key={index}>
+                  <Box
+                    style={
+                      {
+                        // paddingBottom: "0.7rem",
+                      }
+                    }
+                  >
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={style.image}
+                      alt={style.name}
+                      style={{
+                        width: "8rem",
+                        height: "10rem",
+                        overflow: "visible",
+                      }}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="body2"
+                        color="#fff"
+                        style={{
+                          fontWeight: "bold",
+                          marginTop: "2.6rem",
+                        }}
+                      >
+                        {style.name}
+                      </Typography>
+                    </CardContent>
+                    {/* <IconButton
+                    color="primary"
+                    aria-label="save hairstyle"
+                    onClick={() => handleSave(index)}
+                  >
+                    <SaveIcon />
+                  </IconButton> */}
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 });
 

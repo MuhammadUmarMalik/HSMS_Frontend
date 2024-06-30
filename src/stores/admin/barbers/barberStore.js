@@ -151,7 +151,8 @@ class BarberStore {
       const index = this.barbers.findIndex((barber) => barber.id === id);
       if (index !== -1) {
         this.barbers[index] = { ...this.barbers[index], ...response.data };
-        // barberStore.fetchBarbers();
+        this.showSuccess("Successfully Updated...");
+        barberStore.fetchBarbers();
       }
     } catch (error) {
       this.error = error.message || "Failed to update barber";

@@ -3,6 +3,8 @@ import { makeObservable, observable, action, runInAction, toJS } from "mobx";
 import { SC } from "../../services/serverCall";
 import userStore from "../users/usersStore";
 import Swal from "sweetalert2";
+import { baseUrl } from "../../services/apiCalls";
+import axios from "axios";
 
 class SignupStore {
   formFields = {
@@ -77,35 +79,31 @@ class SignupStore {
     this.setLoading(true);
     try {
       const payload = toJS(this.formFields);
-      const response = await SC.postCall("/user_signup", payload);
+      const response = await axios.post(`${baseUrl}/user_signup`, payload);
       console.log("Response Data:", response.data);
 
-      if (response.data && response.data.data && response.data.data.token) {
+      // Check the status from the response
+      if (response.status === 200) {
         console.log("Navigating to home page");
-        const { token } = response.data.data;
-        localStorage.setItem(
-          "userToken",
-          JSON.stringify({ accessToken: token.token, role: "customer" })
-        );
+        // Assuming you have to login separately to get the token later
         runInAction(() => {
-          userStore.setToken(token.token);
           userStore.setRole("customer");
         });
         navigate("/");
-        this.showSuccess("Successfully customer account created");
+        this.showSuccess("Successfully created customer account. Login Now!!");
         this.clearFormFields();
       } else {
         this.showError("Error while creating customer..");
-        this.clearFormFields();
         throw new Error("Invalid response from server");
       }
     } catch (error) {
       runInAction(() => {
-        const errorMessage = error.response
-          ? error.response.data.message
-          : "Signup failed";
+        const errorMessage =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : "Signup failed";
         this.setError(errorMessage);
-        this.showError("Error while creating customer..");
+        this.showError(errorMessage);
         this.clearFormFields();
         console.log("Error Response:", error);
       });

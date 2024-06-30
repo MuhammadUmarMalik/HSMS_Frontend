@@ -29,7 +29,7 @@ const OpenReviewModal = ({ onClose }) => {
     reviewStore.setFormField(e.target.name, e.target.value);
   };
 
-  const handleAddClick = (e) => {
+  const handleAddClick =(e) => {
     e.preventDefault();
     reviewStore.addReviews(reviewStore.formFields);
     onClose();
@@ -68,7 +68,11 @@ const OpenReviewModal = ({ onClose }) => {
         onChange={handleChange}
       />
       <ButtonContainer>
-        <StyledButton variant="contained" color="primary">
+        <StyledButton
+          variant="contained"
+          color="primary"
+          onClick={handleAddClick}
+        >
           {/* {reviewStore.currentBarber ? "Update" : "Post Now"} */}
           Post Now
         </StyledButton>

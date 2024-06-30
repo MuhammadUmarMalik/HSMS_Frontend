@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import {
   FormContainer,
@@ -14,9 +14,10 @@ const AddBarberForm = ({ onClose }) => {
     barberStore.setFormField(e.target.name, e.target.value);
   };
 
-  const handleAddClick = async () => {
+  const handleAddClick = async (e) => {
+    e.preventDefault();
     if (barberStore.currentBarber) {
-      barberStore.updateBarber(
+      await barberStore.updateBarber(
         barberStore.currentBarber.id,
         barberStore.formFields
       );
@@ -28,7 +29,7 @@ const AddBarberForm = ({ onClose }) => {
   };
 
   return (
-    <FormContainer component="form">
+    <FormContainer component="form" onSubmit={handleAddClick}>
       <StyledTextField
         required
         fullWidth
@@ -45,10 +46,10 @@ const AddBarberForm = ({ onClose }) => {
         value={barberStore.formFields.email}
         onChange={handleChange}
       />
-
       <StyledTextField
         required
         fullWidth
+        type="password"
         label="Password"
         name="password"
         value={barberStore.formFields.password}
@@ -71,11 +72,7 @@ const AddBarberForm = ({ onClose }) => {
         onChange={handleChange}
       />
       <ButtonContainer>
-        <StyledButton
-          variant="contained"
-          color="primary"
-          onClick={handleAddClick}
-        >
+        <StyledButton variant="contained" color="primary" type="submit">
           {barberStore.currentBarber ? "Update" : "Add"}
         </StyledButton>
         <StyledCancelButton variant="outlined" onClick={onClose}>

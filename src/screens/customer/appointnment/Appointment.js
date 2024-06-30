@@ -64,11 +64,12 @@ const Appointment = observer(() => {
     e.preventDefault();
 
     if (
-      !appointmentStore.formFields?.date &&
-      !appointmentStore.formFields?.time &&
-      !appointmentStore.formFields?.branch
+      !appointmentStore.formFields?.date ||
+      !appointmentStore.formFields?.time ||
+      !appointmentStore.formFields?.service ||
+      !appointmentStore.formFields?.barber_id
     ) {
-      appointmentStore.showError("Please fill all the fields");
+      appointmentStore.showError("Fill all the fields");
       return;
     } else {
       appointmentStore.handleSubmit(navigate);
@@ -95,13 +96,6 @@ const Appointment = observer(() => {
               InputLabelProps={{
                 shrink: true,
               }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <EventIcon />
-                  </InputAdornment>
-                ),
-              }}
               fullWidth
             />
             <CustomTextField
@@ -112,14 +106,28 @@ const Appointment = observer(() => {
               InputLabelProps={{
                 shrink: true,
               }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <AccessTimeIcon />
-                  </InputAdornment>
-                ),
-              }}
               fullWidth
+            />
+            {/* <CustomTextField
+              value={appointmentStore.formFields.service}
+              select
+              required
+              fullWidth
+              label="Select a barber"
+              name="barber_id"
+              SelectProps={{
+                native: true,
+              }}
+            >
+              
+            </CustomTextField> */}
+            <CustomTextField
+              required
+              fullWidth
+              label="Service"
+              name="service"
+              value={appointmentStore.formFields.service}
+              onChange={handleFieldChange("service")}
             />
             <CustomFormControl fullWidth>
               <InputLabel>Select Barber</InputLabel>

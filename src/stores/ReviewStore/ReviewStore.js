@@ -54,12 +54,47 @@ class ReviewStore {
     }
   }
   //   we will add reviews instesad of barber
+  async AdminfetchReviews() {
+    this.setLoading(true);
+    try {
+      // const response = await SC.getCall("/customer_reviews");
+      const response = await SC.getCall("/all_reviews");
+      console.log("helllllllllllo", response.data.data);
+      this.reviews = await response.data.data;
+      console.log(
+        "data=======>,,,,,,,,,,,,,,,>>>111",
+        this.reviews,
+        "end response.data"
+      );
+      console.log("data=======>,,,,,,,,,,,,,,,>>>,reviews", this.reviews);
+      console.log("reviews-----------------", this.reviews);
+      return this.reviews;
+    } catch (error) {
+      runInAction(() => {
+        this.error =
+          error.message || "Failed to fetch barbers for customer role";
+        console.error(this.error);
+        console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrre");
+        return;
+      });
+    } finally {
+      this.setLoading(false);
+      console.log("usmanaaa", this.barbers);
+    }
+  }
   async fetchReviews() {
     this.setLoading(true);
     try {
-      const response = await SC.getCall("/customer_reviews");
+      // const response = await SC.getCall("/customer_reviews");
+      const response = await SC.getCall("/customer/all_reviews");
       console.log("helllllllllllo", response.data.data);
-      this.reviews = response.data.data;
+      this.reviews = await response.data.data;
+      console.log(
+        "data=======>,,,,,,,,,,,,,,,>>>3333333",
+        this.reviews,
+        "end response.data"
+      );
+      console.log("data=======>,,,,,,,,,,,,,,,>>>,reviews", this.reviews);
       console.log("reviews-----------------", this.reviews);
       return this.reviews;
     } catch (error) {

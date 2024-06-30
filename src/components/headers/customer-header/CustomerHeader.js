@@ -33,7 +33,7 @@ const CustomerHeader = () => {
   };
 
   const menuItems = [
-    { text: "Home", link: "/customer/home" },
+    { text: "Home", link: "/" },
     { text: "AI Styles", link: "/customer/AIStyles" },
     { text: "Services", link: "/customer/services" },
     { text: "Hair Style", link: "/customer/hair-style" },
@@ -88,7 +88,7 @@ const CustomerHeader = () => {
               </Menu>
             </Box>
             <MenuLeft>
-              <NavLink to="/customer/home">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
               <NavLink to="/customer/AIStyles">AI Styles</NavLink>
               <NavLink to="/customer/services">Services</NavLink>
               <NavLink to="/barber/customer/profile">Barbers</NavLink>
@@ -98,7 +98,7 @@ const CustomerHeader = () => {
               <Title variant="h4">SHAPE YOUR STYLE</Title>
             </CenteredBox>
             <MenuRight>
-              {/* <NavLink to="/customer/hair-style">Hair Styles</NavLink> */}
+              <NavLink to="/customer/hair-style">Hair Styles</NavLink>
               <NavLink to="/customer/reviews">Reviews</NavLink>{" "}
               <NavLink to="/customer/contact">Contact</NavLink>{" "}
               <NavLink to="/customer/appointments">Appointments</NavLink>{" "}

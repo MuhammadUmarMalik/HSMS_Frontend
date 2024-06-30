@@ -10,6 +10,7 @@ class AppointmentStore {
     date: "",
     time: "",
     barber_id: "",
+    service: "",
   };
   errors = "";
   loading = false;
@@ -36,6 +37,13 @@ class AppointmentStore {
       text: message,
     });
   }
+  showSuccess(message) {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: message,
+    });
+  }
   async fetchBarbers() {
     this.setLoading(true);
     try {
@@ -59,8 +67,8 @@ class AppointmentStore {
     try {
       const response = await SC.getCall("/all_appointments");
       console.log("jjjjjjjjjj", response.data);
-      console.log("gttt appointments", response.data.data);
-      this.appointments = response.data.data;
+      console.log("gttt appointments", response.data);
+      this.appointments = response.data;
       return this.appointments;
     } catch (error) {
       runInAction(() => {
@@ -103,48 +111,51 @@ class AppointmentStore {
         Authorization: `Bearer ${token}`,
       };
       const barber_id = this.formFields.barber_id;
+      const service = this.formFields.service;
       const time = this.formFields.time;
       const date = this.formFields.date;
 
-      // Function to reformat date from YYYY-MM-DD to DD-MM-YYYY
-      const formatDate = (date) => {
-        const [year, month, day] = date.split("-");
-        return `${day}-${month}-${year}`;
-      };
-
-      const formattedDate = formatDate(date);
-
       const formData = {
-        barber_id: barber_id,
+        barberId: barber_id,
+        date: date,
         time: time,
-        date: formattedDate,
+        service: service,
       };
+      console.log("hhhhhhhhhhhhhey", formData, "byyyyyyyye");
+      console.log("oyeeeeeeeeeee", barber_id, time, date);
 
-      console.log("oyeeeeeeeeeee", barber_id, time, formattedDate);
-
-      const response = await SC.postCall("/appointments", formData);
-
-      //   const response = await axios.post(
-      //     `${baseUrl}/appointments`,
-      //     barber_id,
-      //     time,
-      //     date,
-      //     {
-      //       headers,
-      //     }
-      //   );
+      const response = await axios.post(`${baseUrl}/appointments`, formData, {
+        headers,
+      });
       console.log("Response Data:", response.data);
       if (response.data.status === 200) {
         console.log("usman", response.data);
+        this.showSuccess("Successfully created appointment.");
+        this.clearFormFields();
         navigate("../customer/home");
+      } else if (
+        response.data.message ===
+        "An appointment is already scheduled at this time."
+      ) {
+        this.showError("Appointment with same time already exists.");
       } else {
         throw new Error("Invalid response from server");
       }
     } catch (error) {
       runInAction(() => {
-        this.setError(
-          error.response ? error.response.data.message : "Login failed"
-        );
+        console.log("response.messsss", error);
+        if (
+          error.response &&
+          error.response.data.message ===
+            "An appointment is already scheduled at this time."
+        ) {
+          this.showError("Appointment with same time already exists.");
+        } else {
+          this.setError(
+            error.response ? error.response.data.message : "Login failed"
+          );
+          this.showError("Something went wrong.");
+        }
         console.log(error);
       });
     } finally {
@@ -164,7 +175,8 @@ class AppointmentStore {
     this.formFields = {
       date: "",
       time: "",
-      branch: "",
+      barber_id: "",
+      service: "",
     };
   }
 

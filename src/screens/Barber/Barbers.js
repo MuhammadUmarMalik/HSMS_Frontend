@@ -109,7 +109,19 @@ const Barbers = observer(() => {
 
         <CustomAiHeading>
           <Typography variant="h4">
-            Welcome {barberStore.barbers ? barberStore.barbers?.name : ""}
+            {" "}
+            {role !== "admin" ? (
+              barberStore.barbers ? (
+                <>
+                  Welcome{"  "}
+                  {barberStore.barbers?.name}
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              "Showing All Appointments"
+            )}
           </Typography>
         </CustomAiHeading>
         <CalendTaskContainer>
@@ -173,7 +185,7 @@ const Barbers = observer(() => {
                 </TaskItem>
               );
             })}
-            {appointmentStore.appointments.length > 2 && (
+            {appointmentStore.appointments?.length > 2 && (
               <>
                 <ShowAllLink onClick={handleShowAllClick}>
                   <Typography variant="body2" style={{ color: "#ffcc00" }}>
