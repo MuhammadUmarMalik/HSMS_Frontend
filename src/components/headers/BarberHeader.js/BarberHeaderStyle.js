@@ -8,6 +8,8 @@ export const Container = styled(Box)(({ theme }) => ({
   width: "100%",
   // minHeight: "100vh",
   position: "relative",
+  // marginLeft:"-10%",
+
   // display: "flex",
   // flexDirection: "column",
   // alignItems: "center",

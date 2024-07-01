@@ -96,7 +96,7 @@ const Appointments = observer(() => {
               {appointments?.slice(0, 2).map((appointment) => {
                 const [date, time] = appointment.time.split("T");
 
-                return (  
+                return (
                   <TaskItem key={appointment.id}>
                     <TaskIcon />
                     <TaskInfo>

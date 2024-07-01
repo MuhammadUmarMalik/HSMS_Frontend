@@ -33,7 +33,7 @@ const AdminHeader = () => {
   };
 
   const menuItems = [
-    { text: "Home", link: "/" },
+    { text: "Home", link: "/home" },
     { text: "barber", link: "/barber" }, // add barber page
     { text: "Admin Barber", link: "/barbers/home" }, // calendar
     { text: "Barbers Profile", link: "/barbers/profile" }, // barbers profile list
@@ -84,7 +84,7 @@ const AdminHeader = () => {
             </Menu>
           </Box>
           <MenuLeft>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/home">Home</NavLink>
             <NavLink to="/barber">Barber</NavLink>
             {/* <NavLink to="/barbers/home">Admin   Barbers</NavLink> */}
             <NavLink to="/barbers/home">Appointments</NavLink>

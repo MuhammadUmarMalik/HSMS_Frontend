@@ -33,7 +33,7 @@ const CustomerHeader = () => {
   };
 
   const menuItems = [
-    { text: "Home", link: "/" },
+    { text: "Home", link: "/customer/home" },
     { text: "AI Styles", link: "/customer/AIStyles" },
     { text: "Services", link: "/customer/services" },
     { text: "Hair Style", link: "/customer/hair-style" },
@@ -88,7 +88,7 @@ const CustomerHeader = () => {
               </Menu>
             </Box>
             <MenuLeft>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/customer/home">Home</NavLink>
               <NavLink to="/customer/AIStyles">AI Styles</NavLink>
               <NavLink to="/customer/services">Services</NavLink>
               <NavLink to="/barber/customer/profile">Barbers</NavLink>

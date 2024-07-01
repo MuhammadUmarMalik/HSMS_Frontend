@@ -1,5 +1,5 @@
 // App.js
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Route,
   Routes,
@@ -31,43 +31,37 @@ import Appointment from "./screens/customer/appointnment/Appointment";
 import CustomerHomePage from "./screens/customer/home/Home";
 import { theme } from "./AppStyle";
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
+const RedirectToRoleHome = ({ role }) => {
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (role === "admin") {
+      navigate("/home");
+    } else if (role === "barber") {
+      navigate("/barbers/dashboard");
+    } else if (role === "customer") {
+      navigate("/customer/home");
+    }
+  }, [role, navigate]);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <CircularProgress />
+    </div>
+  );
+};
+
+function App() {
   const userToken = localStorage.getItem("userToken");
   const userTokenObj = userToken ? JSON.parse(userToken) : null;
   const role = userTokenObj ? userTokenObj.role : null;
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (role && location.pathname === "/") {
-      if (role === "admin") {
-        navigate("/home");
-      } else if (role === "barber") {
-        navigate("/barbers/dashboard");
-      } else if (role === "customer") {
-        navigate("/customer/home");
-      }
-    }
-    setIsLoading(false);
-  }, [role, navigate, location.pathname]);
-
-  if (isLoading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
-  }
 
   return (
     <Routes>
@@ -79,20 +73,7 @@ function App() {
       ) : (
         <>
           {/* Redirect root to home page based on role */}
-          <Route
-            path="/"
-            element={
-              <Navigate
-                to={`/${
-                  role === "admin"
-                    ? "home"
-                    : role === "barber"
-                    ? "barbers/dashboard"
-                    : "customer/home"
-                }`}
-              />
-            }
-          />
+          <Route path="/" element={<RedirectToRoleHome role={role} />} />
         </>
       )}
       {/* Admin routes */}

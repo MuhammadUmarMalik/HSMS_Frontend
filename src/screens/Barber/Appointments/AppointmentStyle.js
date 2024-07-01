@@ -8,6 +8,7 @@ export const Container = styled(Box)(({ theme }) => ({
   color: "white",
   minHeight: "100vh",
   position: "relative",
+  overflow: "hidden",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",

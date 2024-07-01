@@ -33,7 +33,7 @@ const BarberHeader = () => {
   };
 
   const menuItems = [
-    { text: "Home", link: "/" },
+    { text: "Home", link: "/barbers/dashboard" },
     { text: "Dashboard", link: "/barbers/dashboard" },
     { text: "Profile", link: "/barbers/profiles" },
     { text: "Appointments", link: "/barbers/appointments" },
@@ -84,7 +84,7 @@ const BarberHeader = () => {
               </Menu>
             </Box>
             <MenuLeft>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/barbers/dashboard">Home</NavLink>
               <NavLink to="/barbers/dashboard">Dashboard</NavLink>
 
             </MenuLeft>
