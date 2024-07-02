@@ -6,16 +6,31 @@ export const Root = styled(Box)({
   display: "flex",
   height: "100vh",
   backgroundColor: "#1a1a3a",
+  gap: "10%",
 });
 
 export const LeftHandleSection = styled(Box)({
   // marginTop: "1rem",
 });
-export const LeftSection = styled(Box)({
-  flex: 1,
-  backgroundImage: `url(${require("../../../assests/barber-shop.webp")})`,
+
+export const Logo = styled("img")({
+  width: "125%",
+  height: "90%",
+  marginRight: "0",
+  zIndex: 3,
+  borderTopLeftRadius: "30px",
+  borderBottomLeftRadius: "30px",
+  marginBottom: "60px",
   backgroundSize: "cover",
   backgroundPosition: "center",
+});
+
+export const LeftSection = styled(Box)({
+  marginTop: "7rem",
+  marginLeft: "-3%",
+  overflow: "hidden",
+  flex: 1,
+  // backgroundImage: `url(${require("../../../assests/barber-shop.webp")})`,
   // marginTop: "16px", // Alternatively, you can use margin-top
 });
 export const RightSection = styled(Container)({
@@ -26,6 +41,7 @@ export const RightSection = styled(Container)({
   alignItems: "center",
   backgroundColor: "#1a1a3a",
   padding: "32px",
+  marginTop: "1rem",
   color: "#fff",
 });
 

@@ -57,7 +57,9 @@ const Services = () => {
           <Typography style={{ fontWeight: "bold" }} variant="h4">
             Professional Services
           </Typography>
-          <Heading1 variant="h4">OUR BEST SERVICES THAT</Heading1>
+          <Heading1 variant="h4" style={{ marginLeft: "0.4rem" }}>
+            OUR BEST SERVICES THAT
+          </Heading1>
           <Heading1Bottom variant="h4">WE OFFERING TO YOU</Heading1Bottom>
         </ServicesHeading>
         <ShapeContainer>

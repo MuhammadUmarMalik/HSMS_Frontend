@@ -69,27 +69,27 @@ const HairStyles = observer(() => {
     <>
       {renderHeader()}
       <Container>
-        <Typography
+        <h1
           variant="h4"
           gutterBottom
           style={{
             fontWeight: "bold",
-            marginTop: "4rem",
-            marginBottom: "2rem",
+            marginTop: "3.5rem",
+            marginBottom: "3.4rem",
           }}
         >
           Virtual Closet
-        </Typography>
+        </h1>
 
         <Grid container spacing={2}>
           <Grid item xs={12} md={3}>
-            <Typography
+            <h2
               variant="h6"
               gutterBottom
               style={{ width: "271px", color: "#ffcc00", fontWeight: "bold" }}
             >
               Select Your Hairstyle Preferences
-            </Typography>
+            </h2>
             <List>
               {hairStylesImages.map((style, index) => (
                 <ListItem key={index} style={{}}>

@@ -123,7 +123,14 @@ const AIStyles = () => {
         {renderHeader()}
 
         <CustomAiHeading>
-          <Typography variant="h4">Ai Recommendation Styles</Typography>
+          <h1
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
+            AI Recommendation Styles
+          </h1>
         </CustomAiHeading>
         <SubContainer>
           <ItemLeft>

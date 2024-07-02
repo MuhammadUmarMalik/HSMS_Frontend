@@ -73,7 +73,14 @@ const Appointments = observer(() => {
         {renderHeader()}
 
         <CustomAiHeading>
-          <Typography variant="h4">Appointments</Typography>
+          <h1
+            sx={{
+              fontWeight: "bold",
+            }}
+            variant="h4"
+          >
+            Appointments
+          </h1>
         </CustomAiHeading>
         <CalendTaskContainer>
           <ItemLeft>
@@ -86,8 +93,12 @@ const Appointments = observer(() => {
               variant="h5"
               style={{
                 color: "#fff",
-                marginBottom: "1rem",
                 textAlign: "center",
+                marginBottom:"1rem"
+              }}
+              sx={{
+                fontWeight: "bold",
+                textAlign: "left",
               }}
             >
               Upcoming Tasks

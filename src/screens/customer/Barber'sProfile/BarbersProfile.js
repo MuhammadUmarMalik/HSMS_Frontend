@@ -55,11 +55,24 @@ const BarbersProfile = () => {
       <Container>
         {renderHeader()}
 
-        <CustomAiHeading>
-          <Typography variant="h4">Barber's Profile</Typography>
+        <CustomAiHeading
+          style={
+            role === "customer"
+              ? { marginTop: "2.5rem" }
+              : { marginTop: "-1.6rem" }
+          }
+        >
+          <h1
+            sx={{
+              fontWeight: "bold",
+            }}
+            variant="h4"
+          >
+            Barber's Profile
+          </h1>
           <h1
             style={{
-              marginTop: "0.56rem",
+              marginTop: "0.7rem",
               marginBottom: "4rem",
               color: "#ffcc00",
             }}
@@ -68,7 +81,7 @@ const BarbersProfile = () => {
             MEET OUR BARBERS TEAM
           </h1>
         </CustomAiHeading>
-        <ImageContainer>
+        <ImageContainer sx={{ paddingBottom: "13rem" }}>
           <ImageItem>
             <RectangleBox>
               <Rectangle />

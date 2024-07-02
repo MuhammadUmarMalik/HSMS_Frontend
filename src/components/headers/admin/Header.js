@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
-  Box,
   IconButton,
   Menu,
   MenuItem,
+  Box,
+  responsiveFontSizes,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
@@ -48,8 +49,16 @@ const AdminHeader = () => {
         elevation={0}
         sx={{ zIndex: 3 }}
       >
-        <Toolbar>
-          <Box sx={{ display: { xs: "block", md: "none" } }}>
+        <Toolbar sx={{ fontWeight: "bold" }}>
+          <Box
+            sx={{
+              display: {
+                xs: "block",
+                md: "none",
+              },
+              fontWeight: "bold",
+            }}
+          >
             <IconButton
               edge="start"
               color="inherit"
@@ -85,7 +94,7 @@ const AdminHeader = () => {
           </Box>
           <MenuLeft>
             <NavLink to="/home">Home</NavLink>
-            <NavLink to="/barber">Barber</NavLink>
+            <NavLink to="/barber">Barbers</NavLink>
             {/* <NavLink to="/barbers/home">Admin   Barbers</NavLink> */}
             <NavLink to="/barbers/home">Appointments</NavLink>
           </MenuLeft>
@@ -94,7 +103,15 @@ const AdminHeader = () => {
             <Title variant="h4">SHAPE YOUR STYLE</Title>
           </CenteredBox>
           <MenuRight>
-            <NavLink to="/barbers/profile">Barbers Profile</NavLink>
+            <NavLink
+              to="/barbers/profile"
+              sx={{
+                paddingRight: "0.8rem",
+                textWrap: "nowrap",
+              }}
+            >
+              Barbers Profile
+            </NavLink>
             <NavLink to="/reviews">Reviews</NavLink>{" "}
           </MenuRight>
         </Toolbar>

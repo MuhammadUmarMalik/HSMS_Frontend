@@ -88,27 +88,40 @@ const Reviews = () => {
     <Box bgcolor="#1a1a3a" minHeight="100vh" color="#fff">
       {renderHeader()}
 
-      <Container>
+      <Container style={role === "customer" ? { paddingTop: "2.7rem" } : {}}>
         {role === "admin" ? null : (
           <CustomButton
             variant="contained"
             color="primary"
             onClick={handleOpen}
+            style={{ fontWeight: "bold" }}
           >
             Give Review
           </CustomButton>
         )}
         <Box py={2}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <h1
+            sx={{
+              fontWeight: "bold",
+            }}
+            variant="h4"
+            align="center"
+            gutterBottom
+          >
             WHAT OUR CLIENTS SAY
-          </Typography>
-          <Typography variant="body1" align="center" gutterBottom>
-            <h2>
-              Elevate your trim, amplify your style – reallygreatsite, where{" "}
-              <br />
-              barbership meets the extraordinary
-            </h2>
-          </Typography>
+          </h1>
+          <h2
+            style={{ color: "#ffcc22" }}
+            variant="body1"
+            align="center"
+            gutterBottom
+          >
+            {/* <h2> */}
+            Elevate your Trim, Amplify your Style – Reallygreatsite, Where{" "}
+            <br />
+            Barbership meets the Extraordinary
+            {/* </h2> */}
+          </h2>
         </Box>
         <br />
         {/* {reviews?.length > 0 ? ( */}

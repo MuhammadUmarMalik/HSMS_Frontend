@@ -99,7 +99,14 @@ const Profile = () => {
         {renderHeader()}
 
         <CustomAiHeading>
-          <Typography variant="h4">Profile Setting</Typography>
+          <h1
+            sx={{
+              fontWeight: "bold",
+            }}
+            variant="h4"
+          >
+            Profile Setting
+          </h1>
         </CustomAiHeading>
         <SubContainer>
           <ItemLeft>

@@ -17,9 +17,9 @@ export const Container = styled(Box)(({ theme }) => ({
 
 export const CustomAiHeading = styled(Box)(({ theme }) => ({
   textAlign: "center",
-  marginBottom: theme.spacing(1),
-  padding: theme.spacing(1),
-  paddingTop: theme.spacing(2),
+  marginBottom: theme.spacing(0.5),
+  // padding: theme.spacing(1),
+  // paddingTop: theme.spacing(2),
 }));
 
 export const CalendTaskContainer = styled(Box)(({ theme }) => ({

@@ -16,9 +16,10 @@ export const Container = styled(Box)(({ theme }) => ({
 
 export const CustomAiHeading = styled(Box)(({ theme }) => ({
   textAlign: "center",
-  marginBottom: theme.spacing(1),
-  padding: theme.spacing(1),
-  paddingTop: theme.spacing(2),
+  // marginBottom: theme.spacing(1),
+  // paddingTop: theme.spacing(2),
+  marginTop: "-0rem",
+  marginBottom: "-1.5rem",
 }));
 
 export const CalendTaskContainer = styled(Box)(({ theme }) => ({
@@ -48,8 +49,8 @@ export const ItemLeft = styled(Box)(({ theme }) => ({
   alignItems: "flex-start",
   paddingLeft: theme.spacing(2),
   flex: 1,
-  marginTop: "3rem",
-  marginLeft: "-3.4rem",
+  marginTop: "0.7rem",
+  marginLeft: "-2.4rem",
   width: "100%", // Ensure full width at all screen sizes
   [theme.breakpoints.between("sm", "md")]: {
     marginBottom: theme.spacing(2),
@@ -60,6 +61,26 @@ export const ItemLeft = styled(Box)(({ theme }) => ({
     width: "90%",
     paddingLeft: theme.spacing(0),
     marginBottom: theme.spacing(2),
+  },
+}));
+
+export const Logo = styled("img")(({ theme }) => ({
+  width: "85%",
+  height: "95%",
+  marginRight: "0",
+  paddingRight:"10rem",
+  zIndex: 3,
+  // borderTopLeftRadius: "30px",
+  // borderBottomLeftRadius: "30px",
+  marginBottom: "60px",
+  [theme.breakpoints.between("sm", "md")]: {
+    width: "90vw",
+    marginLeft: "1.5rem",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    width: "85vw",
+    marginLeft: "3rem",
   },
 }));
 
@@ -155,22 +176,4 @@ export const ShowAllLink = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   marginTop: theme.spacing(2),
   cursor: "pointer",
-}));
-export const Logo = styled("img")(({ theme }) => ({
-  width: "75%",
-  height: "95%",
-  marginRight: "0",
-  zIndex: 3,
-  borderTopLeftRadius: "30px",
-  borderBottomLeftRadius: "30px",
-  marginBottom: "60px",
-  [theme.breakpoints.between("sm", "md")]: {
-    width: "90vw",
-    marginLeft: "1.5rem",
-  },
-
-  [theme.breakpoints.down("sm")]: {
-    width: "85vw",
-    marginLeft: "3rem",
-  },
 }));

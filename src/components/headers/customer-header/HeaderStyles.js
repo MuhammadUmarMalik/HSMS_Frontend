@@ -7,7 +7,8 @@ export const Container = styled(Box)(({ theme }) => ({
   // top:"2",
   color: "white",
   //   minHeight: "100vh",
-  width: "100%",
+  width:"100%",
+  overflowY: "hidden",
   // paddingBottom: "1.4rem",
   position: "absolute",
   display: "flex",
@@ -34,7 +35,8 @@ export const Title = styled(Typography)(({ theme }) => ({
     fontSize: "1.5rem",
   },
   [theme.breakpoints.up("lg")]: {
-    fontSize: "2.5rem",
+    fontSize: "2rem",
+    fontWeight: "bold",
   },
 }));
 

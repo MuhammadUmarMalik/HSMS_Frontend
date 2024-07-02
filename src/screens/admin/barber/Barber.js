@@ -98,7 +98,15 @@ const BarberPage = observer(() => {
     <>
       <Container>
         {renderHeader()}
-        <Typography variant="h4">Barbers</Typography>
+        <h1
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            marginLeft: "0.5rem",
+          }}
+        >
+          Barbers
+        </h1>
         <CustomButton variant="contained" color="primary" onClick={handleOpen}>
           Add New
         </CustomButton>

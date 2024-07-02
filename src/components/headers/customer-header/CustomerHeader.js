@@ -52,7 +52,12 @@ const CustomerHeader = () => {
           elevation={0}
           sx={{ zIndex: 3 }}
         >
-          <Toolbar>
+          <Toolbar
+            sx={{}}
+            style={{
+              fontWeight: "bold",
+            }}
+          >
             <Box sx={{ display: { xs: "block", md: "none" } }}>
               <IconButton
                 edge="start"
@@ -89,16 +94,36 @@ const CustomerHeader = () => {
             </Box>
             <MenuLeft>
               <NavLink to="/customer/home">Home</NavLink>
-              <NavLink to="/customer/AIStyles">AI Styles</NavLink>
+              <NavLink
+                to="/customer/AIStyles"
+                style={{
+                  width: "4.5rem",
+                  textAlign: "center",
+                }}
+              >
+                AI Styles
+              </NavLink>
               <NavLink to="/customer/services">Services</NavLink>
               <NavLink to="/barber/customer/profile">Barbers</NavLink>
             </MenuLeft>
-            <CenteredBox>
+            <CenteredBox
+              style={{
+                marginRight: "2.4rem",
+              }}
+            >
               <Logo src={logo} alt="Logo" />
               <Title variant="h4">SHAPE YOUR STYLE</Title>
             </CenteredBox>
             <MenuRight>
-              <NavLink to="/customer/hair-style">Hair Styles</NavLink>
+              <NavLink
+                to="/customer/hair-style"
+                style={{
+                  width: "5.6rem",
+                  textAlign: "center",
+                }}
+              >
+                Hair Styles
+              </NavLink>
               <NavLink to="/customer/reviews">Reviews</NavLink>{" "}
               <NavLink to="/customer/contact">Contact</NavLink>{" "}
               <NavLink to="/customer/appointments">Appointments</NavLink>{" "}

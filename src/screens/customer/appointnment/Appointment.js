@@ -15,6 +15,7 @@ import {
   CustomTextField,
   CustomButton,
   CustomFormControl,
+  Logo,
 } from "./AppointmentStyles";
 import appointmentStore from "../../../stores/appointment/AppointmentStore";
 import { observer } from "mobx-react";
@@ -25,7 +26,7 @@ import CustomerHeader from "../../../components/headers/customer-header/Customer
 import BarberHeader from "../../../components/headers/BarberHeader.js/BarberHeader";
 import barberStore from "../../../stores/admin/barbers/barberStore";
 import { useNavigate } from "react-router-dom";
-
+import logo from "../../../assests/barber-shop.webp";
 const Appointment = observer(() => {
   const handleFieldChange = (field) => (event) => {
     appointmentStore.setFormField(field, event.target.value);
@@ -79,12 +80,18 @@ const Appointment = observer(() => {
     <>
       {renderHeader()}
       <Root>
-        <LeftSection />
+        <LeftSection>
+          <Logo src={logo} alt="image" />
+        </LeftSection>
         <RightSection>
           <FormBox>
-            <Typography variant="h4" gutterBottom style={{ color: "#fff" }}>
+            <h1
+              variant="h1"
+              gutterBottom
+              style={{ fontWeight: "bold", color: "#fff" }}
+            >
               Make An Appointment
-            </Typography>
+            </h1>
             <Typography variant="body1" gutterBottom style={{ color: "#fff" }}>
               Fill out this form and get your seat
             </Typography>

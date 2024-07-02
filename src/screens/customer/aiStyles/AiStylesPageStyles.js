@@ -14,7 +14,6 @@ export const Container = styled(Box)(({ theme }) => ({
 
 export const CustomAiHeading = styled(Box)(({ theme }) => ({
   textAlign: "center",
-  marginBottom: theme.spacing(4),
   padding: theme.spacing(4),
   marginTop: "2.4rem",
 }));

@@ -48,7 +48,9 @@ const BarberHeader = () => {
           elevation={0}
           sx={{ zIndex: 3 }}
         >
-          <Toolbar>
+          <Toolbar
+            sx={{ fontWeight: "bold" }}
+          >
             <Box sx={{ display: { xs: "block", md: "none" } }}>
               <IconButton
                 edge="start"
@@ -86,7 +88,6 @@ const BarberHeader = () => {
             <MenuLeft>
               <NavLink to="/barbers/dashboard">Home</NavLink>
               <NavLink to="/barbers/dashboard">Dashboard</NavLink>
-
             </MenuLeft>
             <CenteredBox>
               <Logo src={logo} alt="Logo" />
@@ -97,7 +98,6 @@ const BarberHeader = () => {
               <NavLink to="/barbers/appointments">Appointments</NavLink>
 
               {/* <NavLink to="/barbers/contact">Contact US</NavLink> */}
-
             </MenuRight>
           </Toolbar>
         </AppBar>

@@ -108,7 +108,12 @@ const Barbers = observer(() => {
         {renderHeader()}
 
         <CustomAiHeading>
-          <Typography variant="h4">
+          <h1
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
             {" "}
             {role !== "admin" ? (
               barberStore.barbers ? (
@@ -122,7 +127,7 @@ const Barbers = observer(() => {
             ) : (
               "Showing All Appointments"
             )}
-          </Typography>
+          </h1>
         </CustomAiHeading>
         <CalendTaskContainer>
           <ItemLeft>
@@ -131,8 +136,9 @@ const Barbers = observer(() => {
                 variant="h4"
                 style={{
                   color: "#ffcc00",
-                  textAlign: "center",
                   marginBottom: "1rem",
+                  fontWeight: "bold",
+                  textAlign: "left",
                 }}
               >
                 Calendar
@@ -151,11 +157,12 @@ const Barbers = observer(() => {
               <Typography
                 variant="h5"
                 style={{
-                  color: "#fff",
+                  color: "#ffcc00",
                   marginRight: "auto",
+                  fontWeight: "bold",
                 }}
               >
-                Advanced Statistic
+                Advanced Statistics
               </Typography>
               <TuneIcon style={{ color: "#fff" }} />
             </HeaderContainer>
