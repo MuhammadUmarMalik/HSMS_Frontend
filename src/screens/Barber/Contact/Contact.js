@@ -13,7 +13,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LanguageIcon from "@mui/icons-material/Language";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { contactFormStore } from "../../../stores/Barbers/BarbersStore/ContactUsStore";
+import { contactFormStore } from "../../../stores/contact/contactStore";
 import {
   StyledButton,
   StyledTextField,
