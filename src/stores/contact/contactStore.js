@@ -1,51 +1,99 @@
-import { makeAutoObservable } from "mobx";
+import { makeObservable, observable, action, runInAction } from "mobx";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { baseUrl } from "../../services/apiCalls";
 
 class ContactFormStore {
   formFields = {
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
-    phone: "",
+    phone_number: "",
     message: "",
   };
-
   errors = {};
   loading = false;
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this, {
+      formFields: observable,
+      errors: observable,
+      loading: observable,
+      setFormField: action,
+      clearFormFields: action,
+      setError: action,
+      setLoading: action,
+      submitForm: action,
+    });
   }
 
   setFormField(field, value) {
     this.formFields[field] = value;
   }
 
+  clearFormFields() {
+    this.formFields = {
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_number: "",
+      message: "",
+    };
+  }
+
+  setError(errors) {
+    this.errors = errors;
+  }
+
+  setLoading(loading) {
+    this.loading = loading;
+  }
+
+  showError(message) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: message,
+    });
+  }
+
+  showSuccess(message) {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: message,
+    });
+  }
+
   async submitForm() {
-    this.loading = true;
-    this.errors = {};
-
+    this.setLoading(true);
+    this.setError({});
     try {
-      // Replace with your actual API endpoint
-      const response = await axios.post("/api/contact", this.formFields);
+      const response = await axios.post(`${baseUrl}/contact`, this.formFields);
+      console.log("Response Data:", response.data);
 
-      if (response.status === 200) {
-        // Handle successful form submission
-        alert("Message sent successfully!");
+      if (response.status === 200 || response.status === 201) {
+        runInAction(() => {
+          this.clearFormFields();
+          this.showSuccess("Message sent successfully!");
+        });
       } else {
-        // Handle server-side validation errors
-        this.errors = response.data.errors;
+        throw new Error("Invalid response from server");
       }
     } catch (error) {
-      if (error.response && error.response.data.errors) {
-        // Handle server-side validation errors
-        this.errors = error.response.data.errors;
-      } else {
-        // Handle other errors (e.g., network errors)
-        alert("An error occurred. Please try again later.");
-      }
+      runInAction(() => {
+        if (error.response && error.response.data.errors) {
+          this.setError(error.response.data.errors);
+        } else {
+          this.setError({ form: "Submission failed" });
+        }
+        this.showError("Error occurred while submitting the form.");
+        console.log(error);
+      });
     } finally {
-      this.loading = false;
+      runInAction(() => {
+        this.setLoading(false);
+      });
     }
   }
 }

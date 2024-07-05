@@ -123,9 +123,9 @@ const ContactForm = observer(() => {
                     <StyledTextField
                       fullWidth
                       label="First Name"
-                      value={formFields.firstName}
+                      value={formFields.first_name}
                       onChange={(e) =>
-                        handleChange("firstName", e.target.value)
+                        handleChange("first_name", e.target.value)
                       }
                       error={!!errors.firstName}
                       helperText={errors.firstName}
@@ -136,8 +136,10 @@ const ContactForm = observer(() => {
                     <StyledTextField
                       fullWidth
                       label="Last Name"
-                      value={formFields.lastName}
-                      onChange={(e) => handleChange("lastName", e.target.value)}
+                      value={formFields.last_name}
+                      onChange={(e) =>
+                        handleChange("last_name", e.target.value)
+                      }
                       error={!!errors.lastName}
                       helperText={errors.lastName}
                       variant="outlined"
@@ -160,8 +162,10 @@ const ContactForm = observer(() => {
                       fullWidth
                       label="Phone"
                       type="tel"
-                      value={formFields.phone}
-                      onChange={(e) => handleChange("phone", e.target.value)}
+                      value={formFields.phone_number}
+                      onChange={(e) =>
+                        handleChange("phone_number", e.target.value)
+                      }
                       error={!!errors.phone}
                       helperText={errors.phone}
                       variant="outlined"
